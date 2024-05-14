@@ -6,8 +6,6 @@ import { AuthContext } from '../../contexts/AuthContext'
 
 import UsuarioLogin from '../../models/UsuarioLogin'
 
-import './Login.css'
-
 function Login() {
 
   const navigate = useNavigate();

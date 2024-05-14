@@ -6,8 +6,6 @@ import { cadastrarUsuario } from '../../services/Service'
 
 import Usuario from '../../models/Usuario'
 
-import './Cadastro.css'
-
 function Cadastro() {
 
   const navigate = useNavigate();

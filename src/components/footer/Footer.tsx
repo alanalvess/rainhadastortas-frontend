@@ -31,7 +31,7 @@ function Footer() {
           <div className="container flex justify-around items-center py-4">
             <p className='text-xl font-bold'>
               Rainha das Tortas |<span> </span>
-            <Link to='/login' target='blank'>
+            <Link to='/login'>
               Tortaria
             </Link>
             </p>
