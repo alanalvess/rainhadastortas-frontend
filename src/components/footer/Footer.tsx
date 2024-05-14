@@ -31,7 +31,7 @@ function Footer() {
           <div className="container flex justify-around items-center py-4">
             <p className='text-xl font-bold'>
               Rainha das Tortas |<span> </span>
-            <Link to='/login' className='hover:underline' target='blank'>
+            <Link to='/login' target='blank'>
               Tortaria
             </Link>
             </p>
