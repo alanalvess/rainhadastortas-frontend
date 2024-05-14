@@ -28,13 +28,20 @@ function Footer() {
     footerComponent = (
       <>
         <div className="flex justify-center bg-rose-300 text-black w-full y bottom-0">
-          <div className="container flex flex-col items-center py-4">
-            <p className='text-xl font-bold'>Rainha das Tortas | Tortaria </p>
-            <p className='text-lg'>Acesse nosso Instagram</p>
-            <div className='flex gap-2'>
-              <Link to='https://www.instagram.com/rainhadasprodutos2023/' className='hover:underline' target='blank'>
-                <InstagramLogo size={48} />
-              </Link>
+          <div className="container flex justify-around items-center py-4">
+            <p className='text-xl font-bold'>
+              Rainha das Tortas |<span> </span>
+            <Link to='Login' className='hover:underline' target='blank'>
+              Tortaria
+            </Link>
+            </p>
+            <div className=' flex itens-center content-center'>
+              <p className='text-lg content-center'>Acesse nosso Instagram: </p>
+              <div className='flex gap-2'>
+                <Link to='https://www.instagram.com/rainhadasprodutos2023/' className='hover:underline' target='blank'>
+                  <InstagramLogo size={48} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

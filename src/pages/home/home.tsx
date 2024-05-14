@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { DNA } from 'react-loader-spinner'
+// import { DNA } from 'react-loader-spinner'
 
 import { AuthContext } from '../../contexts/AuthContext'
-import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
-import { buscarTudo } from '../../services/Service'
+// import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
+// import { buscarTudo } from '../../services/Service'
 
-import Produto from '../../models/Produto'
+// import Produto from '../../models/Produto'
 
 function Home() {
   
@@ -14,25 +14,25 @@ function Home() {
 
   const navigate = useNavigate();
 
-  const [produtos, setProdutos] = useState<Produto[]>([]);
+  // const [produtos, setProdutos] = useState<Produto[]>([]);
 
   const { usuario } = useContext(AuthContext);
 
-  async function buscarProdutos() {
-    try {
-      await buscarTudo('/produtos/all', setProdutos);
-    } catch (error: any) {
-      ToastAlerta('O token expirou, favor logar novamente teste', Toast.Warning);
-    }
-  }
+  // async function buscarProdutos() {
+  //   try {
+  //     await buscarTudo('/produtos/all', setProdutos);
+  //   } catch (error: any) {
+  //     ToastAlerta('O token expirou, favor logar novamente teste', Toast.Warning);
+  //   }
+  // }
 
   function produto() {
     navigate('/produtos');
   }
 
-  useEffect(() => {
-    buscarProdutos();
-  }, [produtos.length]);
+  // useEffect(() => {
+  //   buscarProdutos();
+  // }, [produtos.length]);
 
   if (usuario.token !== "") {
     homeCoponent = (
@@ -54,7 +54,7 @@ function Home() {
   } else {
     homeCoponent = (
       <>
-        {
+        {/* {
           produtos.length === 0 && (
             <DNA
               visible={true}
@@ -65,7 +65,7 @@ function Home() {
               wrapperClass="dna-wrapper mx-auto"
             />
           )
-        }
+        } */}
         < div className="bg-rose-50 flex items-center justify-center pt-40 min-h-[95vh]" >
           <div className="flex flex-col gap-4 text items-center justify-center py-4">
             <h2 className="text-5xl font-bold"><b>Qual é a sua Torta <b className="text-rose-600">Favorita</b>?</b></h2>

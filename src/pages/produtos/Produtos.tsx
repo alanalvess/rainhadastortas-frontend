@@ -28,7 +28,7 @@ function Produtos() {
     try {
       await buscarTudo('/categorias/all', setCategorias);
     } catch (error: any) {
-      ToastAlerta('O token expirou, favor logar novamente', Toast.Info);
+      ToastAlerta('Não há categorias', Toast.Info);
     }
   }
 
@@ -37,7 +37,7 @@ function Produtos() {
       await buscarTudo('/produtos/all', setProdutos);
 
     } catch (error: any) {
-      ToastAlerta('O token expirou, favor logar novamente', Toast.Warning);
+      ToastAlerta('Não há produtos', Toast.Warning);
     }
   }
 
