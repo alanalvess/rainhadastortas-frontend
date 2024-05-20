@@ -19,7 +19,6 @@ import DeletarProduto from './components/produtos/deletarProduto/DeletarProduto'
 import 'react-toastify/dist/ReactToastify.css';
 import Carrinho from './pages/carrinho/Carrinho';
 
-import './App.css'
 import Sobre from './pages/sobre/Sobre';
 
 function App() {
