@@ -27,14 +27,13 @@ function App() {
   return (
     <>
       <AuthProvider>
-
         <BrowserRouter>
+
           <ToastContainer />
 
-          <header >
-            <Navbar />
-          </header>
-          <main className=' bg-rose-50 min-h-[70vh]'>
+          <Navbar />
+
+          <div className=' bg-rose-50 min-h-[70vh]'>
             <Routes >
 
               <Route path="/" element={<Home />} />
@@ -54,12 +53,9 @@ function App() {
               <Route path="/sobre" element={<Sobre />} />
 
             </Routes>
+          </div>
 
-          </main>
-
-          <footer>
-            <Footer />
-          </footer>
+          <Footer />
 
         </BrowserRouter>
       </AuthProvider>
