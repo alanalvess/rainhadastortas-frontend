@@ -39,7 +39,6 @@ function Navbar() {
               <Link to='' onClick={logout} className='flex items-center '>
                 <div className='mx-1'>Sair</div>
 
-                <div className="container-total-carrinho badge-total-carrinho mx-1 hidden">0</div>
                 <SignOut className="bg-rose-900 text-rose-200 p-1 rounded-lg mx-1 " size={40} weight="fill" />
               </Link>
             </div>
