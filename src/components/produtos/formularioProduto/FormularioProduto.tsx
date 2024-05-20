@@ -77,19 +77,19 @@ function FormularioProduto() {
 
   async function atualizarProduto() {
     await atualizar(`/produtos`, produto, setProduto, { headers: { Authorization: token } });
-    ToastAlerta('Produto atualizado com sucesso', Toast.Sucess);
+    ToastAlerta('Produto atualizado', Toast.Sucess);
     retornar();
   }
 
   async function cadastrarProduto() {
     await cadastrar(`/produtos`, produto, setProduto, { headers: { Authorization: token } });
-    ToastAlerta('Produto cadastrado com sucesso', Toast.Sucess);
+    ToastAlerta('Produto cadastrado', Toast.Sucess);
     retornar();
   }
 
   function handleProdutoError(error: any) {
     if (error.toString().includes('403')) {
-      ToastAlerta('O token expirou, favor logar novamente', Toast.Warning);
+      ToastAlerta('O token expirou, favor logar novamente', Toast.Error);
       handleLogout();
     } else {
       ToastAlerta('Erro ao cadastrar/atualizar o Produto', Toast.Error);
@@ -149,10 +149,6 @@ function FormularioProduto() {
   useEffect(() => {
     setProduto({ ...produto, categoria: categoria });
   }, [categoria]);
-
-  // useEffect(() => {
-  //   console.log('produto.disponivel:', produto.disponivel);
-  // }, [produto.disponivel]);
 
   return (
     <>
@@ -214,23 +210,6 @@ function FormularioProduto() {
             />
           </div>
 
-          {/* <div className="flex flex-col gap-2">
-            <p>Categoria da Produto</p>
-            <select
-              name="categoria"
-              id="categoria"
-              title='categoria'
-              className='border p-2 border-slate-800 rounded'
-              onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
-              <option value="" selected disabled>Selecione uma categoria</option>
-              {categorias.map((categoria) => (
-                <>
-                  <option value={categoria.id} >{categoria.nome}</option>
-                </>
-              ))}
-            </select>
-          </div> */}
-
           <div className="flex flex-col gap-2">
             <label htmlFor="categoria">Categoria do Produto</label>
             <select
@@ -238,7 +217,7 @@ function FormularioProduto() {
               title="categoria"
               name="categoria"
               id="categoria"
-              value={produto.categoria?.id || ''} // Define o valor selecionado com o ID da categoria associada
+              value={produto.categoria?.id || ''} 
               onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
               required
             >
@@ -248,32 +227,6 @@ function FormularioProduto() {
               ))}
             </select>
           </div>
-
-          {/* <div className="flex flex-col gap-2">
-            <p>Produto está disponível?</p>
-            <label>
-              <input
-                type="radio"
-                name="disponivel"
-                value="true"
-                checked={produto.disponivel}
-                onChange={handleRadioChange}
-                required
-              />
-              Ativo
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="disponivel"
-                value="false"
-                checked={!produto.disponivel}
-                onChange={handleRadioChange}
-                required
-              />
-              Inativo
-            </label>
-          </div> */}
 
           <div className="flex flex-col gap-2">
             <label htmlFor="disponivel">Produto está disponível?</label>

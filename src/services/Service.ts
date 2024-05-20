@@ -14,13 +14,8 @@ export const login = async(url: string, dados: Object, setDados: Function) => {
   setDados(resposta.data);
 }
 
-export const buscar = async(url: string, setDados: Function, header: Object) => {
+export const buscar = async(url: string, setDados: Function, header?: Object) => {
   const resposta = await api.get(url, header);
-  setDados(resposta.data);
-}
-
-export const buscarTudo = async(url: string, setDados: Function) => {
-  const resposta = await api.get(url);
   setDados(resposta.data);
 }
 

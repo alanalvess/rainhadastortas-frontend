@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { DNA } from 'react-loader-spinner'
 
-import { AuthContext } from '../../contexts/AuthContext'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
 import { buscar } from '../../services/Service'
 
@@ -11,30 +9,17 @@ import CardCategorias from '../../components/categorias/cardCategorias/CardCateg
 
 function Categorias() {
 
-  const navigate = useNavigate();
-
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
 
   async function buscarCategorias() {
     try {
-      await buscar('/categorias', setCategorias, { headers: { Authorization: token } });
+      await buscar('/categorias/all', setCategorias);
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        ToastAlerta('O token expirou, favor logar novamente', Toast.Warning);
-        handleLogout();
+        ToastAlerta('Não há categorias para exibir', Toast.Info);
       }
     }
   }
-
-  useEffect(() => {
-    if (token === '') {
-      ToastAlerta('Você precisa estar logado', Toast.Info);
-      navigate('/login');
-    }
-  }, [token]);
 
   useEffect(() => {
     buscarCategorias();

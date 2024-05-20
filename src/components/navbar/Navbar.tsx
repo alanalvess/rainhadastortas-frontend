@@ -5,12 +5,7 @@ import { ShoppingCart, SignOut } from '@phosphor-icons/react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
 
-
-// import ModalCarrinho from '../carrinho/modalCarrinho/ModalCarrinho'
 import Logo from '../../assets/images/logo.jpeg'
-// import Produto from '../../models/Produto'
-// import { calcularQuantidade } from '../../pages/carrinho/Carrinho'
-// import { calcularQuantidade } from '../../pages/carrinho/Carrinho'
 
 function Navbar() {
 
@@ -18,81 +13,13 @@ function Navbar() {
 
   const navigate = useNavigate();
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, handleLogout, quantidadeProdutos } = useContext(AuthContext);
 
   function logout() {
     handleLogout();
-    ToastAlerta('Usuário deslogado com sucesso', Toast.Sucess);
+    ToastAlerta('Usuário deslogado', Toast.Sucess);
     navigate('/login');
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // const [produtosNoCarrinho, setProdutosNoCarrinho] = useState<Produto[]>([]);
-
-  
-  
-  
-  // function obterProdutoDoLocalStorage() {
-  //   const produtosSalvos = localStorage.getItem('produtosNoCarrinho');
-  //   if (produtosSalvos) {
-  //     const produtosConvertidos = JSON.parse(produtosSalvos) as Produto[];
-  //     // Faça o que for necessário com os produtos obtidos
-  //     console.log(produtosConvertidos);
-  //     return produtosNoCarrinho.reduce((quantidade, produto) => quantidade + produto.quantidade, 0);
-  //   } else {
-  //     console.log('Nenhum produto encontrado no localStorage.');
-  //   }
-  // }
-  
-  // useEffect(() => {
-  //   const produtosSalvos = localStorage.getItem('produtosNoCarrinho');
-  //   if (produtosSalvos) {
-  //     const produtosConvertidos = JSON.parse(produtosSalvos) as Produto[];
-  //     setProdutosNoCarrinho(produtosConvertidos);
-  //   }
-  // }, [produtosNoCarrinho]);
-  
-  // function calcularQuantidade(): number {
-  //   return produtosNoCarrinho.reduce((quantidade, produto) => quantidade + produto.quantidade, 0);
-  // }
-  
-
-  
-  // const [produtosNoCarrinho, setProdutosNoCarrinho] = useState<Produto[]>([]);
-
-  // const quantidadeTotal = calcularQuantidade();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Exemplo de uso:
 
   if (usuario.token !== "") {
     navbarComponent = (
@@ -136,17 +63,18 @@ function Navbar() {
               <Link to='/produtos/all' className='hover:underline'>Produtos</Link>
             </div>
 
-            <div className="bg-rose-300 rounded-2xl p-2 text-black hover:bg-rose-900 hover:text-white " >
+            <div className="bg-rose-300 rounded-2xl p-2  hover:bg-rose-900 hover:text-white " >
 
               <Link to={'/carrinho'}>
                 <div className='flex items-center relative '>
 
-                  <div className="container-total-carrinho badge-total-carrinho mx-1">
+                  <div className="container-total-carrinho badge-total-carrinho text-black mx-1">
                     <p>Meu Carrinho</p>
                   </div>
                   <ShoppingCart className="bg-rose-600 text-rose-200 p-1 rounded-lg mx-1" size={45} weight="fill" />
-                  <span className="absolute z-50 right-1 top-2 font-bold inline-flex items-center justify-center w-6 h-6 me-2 text-sm text-rose-950 rounded-full">
-                    {/* {quantidadeTotal} */}
+                  <span className="absolute z-50 right-1 top-2 inline-flex items-center justify-center w-6 h-6 me-2 text-sm text-rose-600 font-bold rounded-full">
+                    {quantidadeProdutos}
+
                   </span>
                 </div>
               </Link>

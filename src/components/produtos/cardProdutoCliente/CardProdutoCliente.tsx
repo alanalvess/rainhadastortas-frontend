@@ -1,13 +1,20 @@
 import { ShoppingCart } from '@phosphor-icons/react';
 
 import Produto from '../../../models/Produto'
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 interface CardProdutoClienteProps {
   produto: Produto;
-  onAdicionar: (produto: Produto) => void;
 }
 
-function CardProdutoCliente({ produto, onAdicionar }: CardProdutoClienteProps) {
+function CardProdutoCliente({ produto }: CardProdutoClienteProps) {
+
+  const { adicionarProduto } = useContext(AuthContext)
+
+  const handleMais = () => {
+    adicionarProduto({ ...produto});
+};
 
   return (
     <div className='flex flex-col rounded-xl overflow-auto justify-between bg-rose-200'>
@@ -32,7 +39,7 @@ function CardProdutoCliente({ produto, onAdicionar }: CardProdutoClienteProps) {
                 <button
                   title='add'
                   className='flex items-center gap-3 p-2'
-                  onClick={() => onAdicionar(produto)}
+                  onClick={handleMais}
                 >
                   Adicionar ao carrinho
                   <ShoppingCart size={30} weight='fill' />

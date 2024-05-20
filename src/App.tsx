@@ -34,7 +34,7 @@ function App() {
           <header >
             <Navbar />
           </header>
-          <main className=' bg-rose-50 min-h-[90vh] '>
+          <main className=' bg-rose-50 min-h-[70vh]'>
             <Routes >
 
               <Route path="/" element={<Home />} />

@@ -1,22 +1,20 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { buscarTudo } from '../../services/Service'
+import { buscar } from '../../services/Service'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
 
 import Categoria from '../../models/Categoria'
-import Produto from '../../models/Produto'
 import CardProdutoCliente from '../../components/produtos/cardProdutoCliente/CardProdutoCliente'
 import CardProdutoAdmin from '../../components/produtos/cardProdutoAdmin/CardProdutoAdmin'
 import { AuthContext } from '../../contexts/AuthContext'
+import { DNA } from 'react-loader-spinner'
 
 function Produtos() {
 
-  const { usuario } = useContext(AuthContext);
+  const { usuario, produtos, setProdutos } = useContext(AuthContext);
 
-  const [produtos, setProdutos] = useState<Produto[]>([]);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
-  const [produtosNoCarrinho, setProdutosNoCarrinho] = useState<Produto[]>([]);
 
   const produtosFiltrados = produtos.filter((produto) => produto.categoria?.nome === categoriaSelecionada);
   const produtosOrdenados = produtosFiltrados.sort((a, b) => a.nome.localeCompare(b.nome));
@@ -26,60 +24,23 @@ function Produtos() {
 
   async function buscarCategorias() {
     try {
-      await buscarTudo('/categorias/all', setCategorias);
+      await buscar('/categorias/all', setCategorias);
     } catch (error: any) {
-      ToastAlerta('Não há categorias', Toast.Info);
+      ToastAlerta('Não há categorias para exibir', Toast.Info);
     }
   }
 
   async function buscarProdutos() {
     try {
-      await buscarTudo('/produtos/all', setProdutos);
-
+      await buscar('/produtos/all', setProdutos);
     } catch (error: any) {
-      ToastAlerta('Não há produtos', Toast.Warning);
+      ToastAlerta('Não há produtos para exibir', Toast.Info);
     }
-  }
-
-  function adicionarNovoProduto(produto: Produto) {
-    const novoProduto = {
-      ...produto,
-      quantidade: 1,
-      total: produto.valor
-    }
-
-    setProdutosNoCarrinho((prevProdutos) => [...prevProdutos, novoProduto]);
-  }
-
-  function salvarNoLocalStorage() {
-    localStorage.setItem('produtosNoCarrinho', JSON.stringify(produtosNoCarrinho));
-  }
-
-  function adicionarAoCarrinho(produto: Produto) {
-    const produtoExistente = produtosNoCarrinho.find((p) => p.id === produto.id);
-
-    if (!produtoExistente) {
-      adicionarNovoProduto(produto);
-      ToastAlerta('Produto adicionado ao carrinho', Toast.Sucess)
-    } else {
-      ToastAlerta('Produto já está no carrinho', Toast.Info)
-    }
-
-    salvarNoLocalStorage();
   }
 
   function handleCategoriaClick(categoriaNome: string) {
     setCategoriaSelecionada(categoriaNome);
   }
-
-  useEffect(() => {
-    const produtosSalvos = localStorage.getItem('produtosNoCarrinho');
-
-    if (produtosSalvos) {
-      const produtosConvertidos = JSON.parse(produtosSalvos) as Produto[];
-      setProdutosNoCarrinho(produtosConvertidos);
-    }
-  }, []);
 
   useEffect(() => {
     buscarCategorias();
@@ -89,6 +50,7 @@ function Produtos() {
   useEffect(() => {
     if (categorias.length > 0 && categoriaSelecionada === null) {
       setCategoriaSelecionada(categorias[0].nome);
+      todosOsProdutos
     }
   }, [categorias, categoriaSelecionada]);
 
@@ -107,18 +69,21 @@ function Produtos() {
   } else {
     produtosComponent = (
 
-    <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-      {todosOsProdutos.map((produto) => (
-        <CardProdutoCliente key={produto.id} produto={produto} onAdicionar={adicionarAoCarrinho} />
-      ))}
-    </div>
+      <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+        {todosOsProdutos.map((produto) => (
+          <CardProdutoCliente key={produto.id} produto={produto} />
+        ))}
+      </div>
     )
   }
 
   return (
     <>
+
+
       <div className='pt-60 min-h-[95vh]'>
         <div className='container mx-auto p-4 flex justify-evenly gap-4 rounded-xl bg-rose-500'>
+
           {categorias.map((categoria) => (
             <button
               key={categoria.id}
@@ -130,6 +95,16 @@ function Produtos() {
           ))}
         </div>
 
+        {todosOsProdutos.length === 0 && (
+          <DNA
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper mx-auto"
+          />
+        )}
         {produtosComponent}
       </div>
     </>

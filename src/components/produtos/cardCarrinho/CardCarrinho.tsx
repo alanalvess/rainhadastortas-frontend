@@ -1,17 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Minus, Plus } from '@phosphor-icons/react';
 
 import Produto from '../../../models/Produto'
+import { AuthContext } from '../../../contexts/AuthContext';
 
 interface CardCarrinhoProps {
   produto: Produto;
-  onAdicionar: (produto: Produto, total: number) => void;
-  onRemover: (produto: Produto) => void;
 }
 
-function CardCarrinho({ produto, onAdicionar, onRemover }: CardCarrinhoProps) {
+function CardCarrinho({ produto }: CardCarrinhoProps) {
 
   const [total, setTotal] = useState(0);
+
+  const { aumentarProduto, diminuirProduto } = useContext(AuthContext)
+
+
+  const handleMais = () => {
+    aumentarProduto({ ...produto, quantidade: produto.quantidade + 1 });
+  };
+
+  const handleMenos = () => {
+    if (produto.quantidade > 1) {
+      diminuirProduto({ ...produto, quantidade: produto.quantidade - 1 });
+    }
+  };
 
   useEffect(() => {
     setTotal(produto.quantidade * produto.valor)
@@ -31,13 +43,13 @@ function CardCarrinho({ produto, onAdicionar, onRemover }: CardCarrinhoProps) {
             <div className="flex max-h-[30px]">
               <div className=''>
                 <div className=" px-2 py-1 mx-1 text-white bg-rose-400  flex items-center justify-center rounded-lg text-center add-carrinho">
-                  <button className="btn-menos cursor-pointer px-2 " onClick={() => onRemover(produto)}>
+                  <button className="btn-menos cursor-pointer px-2 " onClick={handleMenos}>
                     <Minus size={15} />
                   </button>
 
                   <span className="add-numero-itens text-center px-2" >{produto.quantidade}</span>
 
-                  <button className="btn-mais cursor-pointer px-2" onClick={() => onAdicionar(produto, total)}>
+                  <button className="btn-mais cursor-pointer px-2" onClick={handleMais}>
                     <Plus size={15} />
                   </button>
                 </div>

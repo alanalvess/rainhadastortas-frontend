@@ -26,13 +26,13 @@ function FormularioCategoria() {
 
   async function atualizarCategoria() {
     await atualizar(`/categorias`, categoria, setCategoria, { headers: { Authorization: token } });
-    ToastAlerta('Categoria atualizado com sucesso', Toast.Sucess);
+    ToastAlerta('Categoria atualizada', Toast.Sucess);
     retornar();
   }
 
   async function cadastrarCategoria() {
     await cadastrar(`/categorias`, categoria, setCategoria, { headers: { Authorization: token } });
-    ToastAlerta('Categoria cadastrado com sucesso', Toast.Sucess);
+    ToastAlerta('Categoria cadastrada', Toast.Sucess);
     retornar();
   }
 
@@ -55,7 +55,7 @@ function FormularioCategoria() {
 
   function handleCategoriaError(error: any) {
     if (error.toString().includes('403')) {
-      ToastAlerta('O token expirou, favor logar novamente', Toast.Warning);
+      ToastAlerta('O token expirou, favor logar novamente', Toast.Error);
       handleLogout();
     } else {
       ToastAlerta('Erro ao cadastrar/atualizar a Categoria', Toast.Error);

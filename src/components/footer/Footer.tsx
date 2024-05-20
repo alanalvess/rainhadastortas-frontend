@@ -18,7 +18,7 @@ function Footer() {
             <p className='text-xl font-bold text-white '>Rainha das Tortas | Tortaria</p>
             <div className=' bg-rose-200 p-5 text-rose-950'>
               <p className='text-lg'>Link de acesso para clientes:</p>
-              <Link to='/home'>https://rainhadastortas.onrender.com/home</Link>
+              <span>https://rainhadastortas.vercel.app/</span>
             </div>
           </div>
         </div>

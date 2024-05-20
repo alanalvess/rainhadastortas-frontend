@@ -25,7 +25,7 @@ function DeletarProduto() {
       await buscar(`/produtos/${id}`, setProduto, { headers: { Authorization: token } });
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        ToastAlerta('O token expirou, favor logar novamente', Toast.Warning);
+        ToastAlerta('O token expirou, favor logar novamente', Toast.Error);
         handleLogout();
       }
     }
@@ -36,9 +36,9 @@ function DeletarProduto() {
 
     try {
       await deletar(`/produtos/${id}`, { headers: { Authorization: token } });
-      ToastAlerta('Produto apagada com sucesso', Toast.Sucess);
+      ToastAlerta('Produto apagado', Toast.Sucess);
     } catch (error) {
-      ToastAlerta('Erro ao apagar a Produto', Toast.Error);
+      ToastAlerta('Erro ao apagar o Produto', Toast.Error);
     }
 
     setIsLoading(false);

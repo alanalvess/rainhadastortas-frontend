@@ -32,9 +32,9 @@ function Cadastro() {
     if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
       try {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuarioResposta);
-        ToastAlerta('Usuário cadastrado com sucesso', Toast.Sucess);
+        ToastAlerta('Usuário cadastrado', Toast.Sucess);
       } catch (error) {
-        ToastAlerta('Erro ao cadastrar usuárioo', Toast.Error);
+        ToastAlerta('Erro ao cadastrar usuário', Toast.Error);
       }
 
     } else {

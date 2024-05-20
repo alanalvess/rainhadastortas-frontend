@@ -25,7 +25,7 @@ function DeletarCategoria() {
       await buscar(`/categorias/${id}`, setCategoria, { headers: { Authorization: token } });
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        ToastAlerta('O token expirou, favor logar novamente', Toast.Info);
+        ToastAlerta('O token expirou, favor logar novamente', Toast.Error);
         handleLogout();
       }
     }
@@ -36,7 +36,7 @@ function DeletarCategoria() {
 
     try {
       await deletar(`/categorias/${id}`, { headers: { Authorization: token } });
-      ToastAlerta('Categoria apagada com sucesso', Toast.Sucess);
+      ToastAlerta('Categoria apagada', Toast.Sucess);
     } catch (error) {
       ToastAlerta('Erro ao apagar a Categoria', Toast.Error);
     }
