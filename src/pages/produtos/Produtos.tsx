@@ -7,8 +7,7 @@ import { buscar } from '../../services/Service'
 
 import Categoria from '../../models/Categoria'
 import Produto from '../../models/Produto'
-import CardProdutoAdmin from '../../components/produtos/cardProdutoAdmin/CardProdutoAdmin'
-import CardProdutoCliente from '../../components/produtos/cardProdutoCliente/CardProdutoCliente'
+import CardProduto from '../../components/produtos/cardProduto/CardProduto'
 
 function Produtos() {
 
@@ -23,6 +22,8 @@ function Produtos() {
   const produtosDisponiveis = produtosOrdenados.filter((produto) => produto.disponivel);
   const produtosIndisponiveis = produtosOrdenados.filter((produto) => !produto.disponivel);
   const todosProdutosFiltrados = [...produtosDisponiveis, ...produtosIndisponiveis];
+
+  const produtosParaExibir = categoriaSelecionada === null ? produtos : todosProdutosFiltrados;
 
   async function buscarCategorias() {
     try {
@@ -58,14 +59,13 @@ function Produtos() {
   if (usuario.token !== "") {
     produtosComponent = (
       <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {categoriaSelecionada === null
-          ? produtos.map((produto) => (
-            <CardProdutoAdmin key={produto.id} produto={produto} />
+        {produtosParaExibir.length > 0 ? (
+          produtosParaExibir.map((produto) => (
+            <CardProduto key={produto.id} produto={produto} />
           ))
-          : todosProdutosFiltrados.map((produto) => (
-            <CardProdutoAdmin key={produto.id} produto={produto} />
-          ))
-        }
+        ) : (
+          <p className="text-center col-span-full">Não há produtos desta categoria</p>
+        )}
 
       </div>
     )
@@ -73,14 +73,13 @@ function Produtos() {
   } else {
     produtosComponent = (
       <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {categoriaSelecionada === null
-          ? produtos.map((produto) => (
-            <CardProdutoCliente key={produto.id} produto={produto} />
+        {produtosParaExibir.length > 0 ? (
+          produtosParaExibir.map((produto) => (
+            <CardProduto key={produto.id} produto={produto} />
           ))
-          : todosProdutosFiltrados.map((produto) => (
-            <CardProdutoCliente key={produto.id} produto={produto} />
-          ))
-        }
+        ) : (
+          <p className="text-center col-span-full">Não há produtos</p>
+        )}
       </div>
     )
   }
@@ -112,7 +111,7 @@ function Produtos() {
           />
         )}
 
-        {produtosComponent} 
+        {produtosComponent}
       </div>
     </>
   )
