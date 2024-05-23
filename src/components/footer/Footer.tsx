@@ -31,12 +31,14 @@ function Footer() {
           <div className="container flex justify-around items-center py-4">
             <p className='text-xl font-bold'>
               Rainha das Tortas |<span> </span>
-            <Link to='/login'>
-              Tortaria
-            </Link>
+              <Link to='/login'>
+                Tortaria
+              </Link>
             </p>
+
             <div className=' flex itens-center content-center'>
               <p className='text-lg content-center'>Acesse nosso Instagram: </p>
+              
               <div className='flex gap-2'>
                 <Link to='https://www.instagram.com/rainhadasprodutos2023/' className='hover:underline' target='blank'>
                   <InstagramLogo size={48} />

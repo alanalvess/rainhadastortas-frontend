@@ -12,7 +12,6 @@ interface AuthContextProps {
   handleLogin(usuario: UsuarioLogin): Promise<void>;
   isLoading: boolean;
   produtos: Produto[]
-  setProdutos: React.Dispatch<React.SetStateAction<Produto[]>>;
   adicionarProduto: (produto: Produto) => void
   removerProduto: (id: number) => void
   aumentarProduto: (produto: Produto) => void
@@ -27,10 +26,11 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-
+  
+  const [carrinho, setCarrinho] = useState<Produto[]>([])
   const [produtos, setProdutos] = useState<Produto[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  
   const quantidadeProdutos = produtos.length;
 
   const [usuario, setUsuario] = useState<UsuarioLogin>({
@@ -64,20 +64,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
   }
 
-
   function adicionarProduto(produto: Produto) {
     setProdutos((state) => {
       const produtoExistente = state.find((item) => item.id === produto.id);
-      let novoCarrinho;
+      let novoCart;
+
       if (!produtoExistente) {
-        novoCarrinho = [...state, { ...produto, quantidade: 1, total: produto.valor }];
+        novoCart = [...state, { ...produto, quantidade: 1, total: produto.valor }];
         ToastAlerta('Produto adicionado ao carrinho', Toast.Sucess)
       } else {
-        novoCarrinho = [...state];
-        ToastAlerta('Este produto já existe no carrinho', Toast.Info)
+        novoCart = [...state];
+        ToastAlerta('Produto já existe no carrinho', Toast.Info)
       }
-      localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCarrinho));
-      return novoCarrinho;
+
+      localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCart));
+      return novoCart;
     });
   }
 
@@ -85,11 +86,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setProdutos((state) => {
       const produtoExistente = state.find((item) => item.id === produto.id);
       if (produtoExistente && produtoExistente.quantidade) {
-        const novoCarrinho = state.map((item) =>
-          item.id === produto.id ? { ...item, quantidade: item.quantidade + 1, total: (item.quantidade + 1) * produto.valor } : item
+        const novoCart = state.map((item) =>
+          item.id === produto.id ? {
+            ...item,
+            quantidade: item.quantidade + 1,
+            total: ((item.quantidade + 1) * item.valor)
+          } : item
         );
-        localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCarrinho));
-        return novoCarrinho;
+
+        localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCart));
+        return novoCart;
       }
     });
   }
@@ -98,11 +104,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setProdutos((state) => {
       const produtoExistente = state.find((item) => item.id === produto.id);
       if (produtoExistente) {
-        const novoCarrinho = state.map((item) =>
-          item.id === produto.id ? { ...item, quantidade: item.quantidade - 1, total: (item.quantidade - 1) * produto.valor } : item
+        const novoCart = state.map((item) =>
+          item.id === produto.id ? {
+            ...item,
+            quantidade: item.quantidade - 1,
+            total: ((item.quantidade - 1) * item.valor)
+          } : item
         );
-        localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCarrinho));
-        return novoCarrinho;
+        localStorage.setItem('produtosNoCarrinho', JSON.stringify(novoCart));
+        return novoCart;
       }
     });
   }
@@ -120,6 +130,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
+  useEffect(() => {
+    const salvarCarrinho = localStorage.getItem('produtosNoCarrinho');
+    if (salvarCarrinho) {
+      setCarrinho(JSON.parse(salvarCarrinho));
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -127,13 +144,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         handleLogin,
         handleLogout,
         isLoading,
-        aumentarProduto,
-        diminuirProduto,
+        produtos,
         adicionarProduto,
         removerProduto,
-        produtos,
+        aumentarProduto,
+        diminuirProduto,
         quantidadeProdutos,
-        setProdutos
       }}
     >
       {children}

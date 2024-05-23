@@ -23,6 +23,7 @@ function Home() {
             <button className='border bg-rose-200 text-rose-900 text-5xl p-4 rounded-3xl hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
               <Link to={'/cadastroCategoria'}>Cadastrar Categoria</Link>
             </button>
+            
             <button className='border bg-rose-200 text-rose-900 text-5xl p-4 rounded-3xl hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
               <Link to={'/cadastroProduto'}>Cadastrar Produto</Link>
             </button>

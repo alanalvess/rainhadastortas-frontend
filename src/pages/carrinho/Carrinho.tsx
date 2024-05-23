@@ -1,9 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import CardCarrinho from '../../components/produtos/cardCarrinho/CardCarrinho';
 import { Trash } from '@phosphor-icons/react';
-import Produto from '../../models/Produto';
+
 import { AuthContext } from '../../contexts/AuthContext';
+
+import CardCarrinho from '../../components/produtos/cardCarrinho/CardCarrinho';
 
 const Carrinho = () => {
   let carrinhoComponent;
@@ -11,11 +12,11 @@ const Carrinho = () => {
   
   const CELULAR_EMPRESA = '5511984982465';
 
-  const { produtos, setProdutos, removerProduto } = useContext(AuthContext)
+  const { produtos, removerProduto } = useContext(AuthContext);
 
-  function calcularTotalCarrinho(produtos: Produto[]) {
+  function calcularTotalCarrinho() {
     const totalCarrinho = produtos.reduce((total, produto) => {
-      return total + (produto.total || 0);
+      return total + produto.total;
     }, 0);
     return totalCarrinho;
   }
@@ -29,7 +30,7 @@ const Carrinho = () => {
     });
 
     texto += `\nItens do pedido:\n\n${itens}`;
-    texto += `\nTotal do pedido: R$ ${calcularTotalCarrinho(produtos).toFixed(2).replace('.', ',')}`;
+    texto += `\nTotal do pedido: R$ ${calcularTotalCarrinho().toFixed(2).replace('.', ',')}`;
 
     const mensagemCodificada = encodeURI(texto);
     linkWhatsapp = `https://api.whatsapp.com/send?phone=${CELULAR_EMPRESA}&text=${mensagemCodificada}`;
@@ -37,13 +38,7 @@ const Carrinho = () => {
     return linkWhatsapp;
   }
 
-  useEffect(() => {
-    const produtosSalvos = localStorage.getItem('produtosNoCarrinho');
-    if (produtosSalvos) {
-      const produtosConvertidos = JSON.parse(produtosSalvos) as Produto[];
-      setProdutos(produtosConvertidos);
-    }
-  }, []);
+
 
   if (produtos.length > 0) {
     carrinhoComponent = (
@@ -68,7 +63,7 @@ const Carrinho = () => {
             <p className='font-bold'>
               Valor total do carrinho:
               <span className=' text-white mx-2 '>
-                R$ {calcularTotalCarrinho(produtos).toFixed(2).replace('.', ',')}
+                R$ {calcularTotalCarrinho().toFixed(2).replace('.', ',')}
               </span>
             </p>
 

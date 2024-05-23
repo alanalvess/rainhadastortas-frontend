@@ -15,10 +15,17 @@ function CardProdutoAdmin({ produto }: CardProdutoProps) {
 
         <div className='p-10 '>
           <h4 className='text-xl font-semibold uppercase p-2 text-rose-800'>{produto.nome}</h4>
-          <img className="h-auto max-w-full rounded-xl" src={produto.imagem} alt="Imagem do Sabor" />
+          <img className="max-h-40 max-w-full rounded-xl" src={produto.imagem} alt="Imagem do Sabor" />
 
           <p className='text-lg font-semibold py-4'>Preço: R$ {produto.valor.toFixed(2).replace('.', ',')}</p>
           <p className='text-lg py-2'>{produto.descricao}</p>
+          <p className='text-lg mb-0 py-2'>
+            {produto.disponivel
+              .toString()
+              .replace('true', 'Disponível')
+              .replace('false', 'Indisponível')
+            }
+          </p>
         </div>
       </div>
 
@@ -32,7 +39,7 @@ function CardProdutoAdmin({ produto }: CardProdutoProps) {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
 export default CardProdutoAdmin;

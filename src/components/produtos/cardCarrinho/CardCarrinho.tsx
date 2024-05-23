@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { Minus, Plus } from '@phosphor-icons/react';
 
-import Produto from '../../../models/Produto'
 import { AuthContext } from '../../../contexts/AuthContext';
+
+import Produto from '../../../models/Produto'
 
 interface CardCarrinhoProps {
   produto: Produto;
@@ -10,23 +11,22 @@ interface CardCarrinhoProps {
 
 function CardCarrinho({ produto }: CardCarrinhoProps) {
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<number>(0);
 
-  const { aumentarProduto, diminuirProduto } = useContext(AuthContext)
-
+  const { aumentarProduto, diminuirProduto } = useContext(AuthContext);
 
   const handleMais = () => {
-    aumentarProduto({ ...produto, quantidade: produto.quantidade + 1 });
-  };
+    aumentarProduto({ ...produto });
+  }
 
   const handleMenos = () => {
     if (produto.quantidade > 1) {
-      diminuirProduto({ ...produto, quantidade: produto.quantidade - 1 });
+      diminuirProduto({ ...produto });
     }
-  };
+  }
 
   useEffect(() => {
-    setTotal(produto.quantidade * produto.valor)
+    setTotal(produto.quantidade * produto.valor);
   }, [produto.quantidade, produto.valor]);
 
   return (
@@ -47,7 +47,7 @@ function CardCarrinho({ produto }: CardCarrinhoProps) {
                     <Minus size={15} />
                   </button>
 
-                  <span className="add-numero-itens text-center px-2" >{produto.quantidade}</span>
+                  <span className="add-numero-itens text-center px-2" >{produto.quantidade }</span>
 
                   <button className="btn-mais cursor-pointer px-2" onClick={handleMais}>
                     <Plus size={15} />

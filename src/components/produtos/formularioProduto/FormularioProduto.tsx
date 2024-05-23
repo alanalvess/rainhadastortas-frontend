@@ -15,13 +15,12 @@ function FormularioProduto() {
 
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const { id } = useParams<{ id: string }>();
 
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const [categoria, setCategoria] = useState<Categoria>({
@@ -41,11 +40,6 @@ function FormularioProduto() {
     categoria: null
   });
 
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setProduto((prevProduto) => ({ ...prevProduto, [name]: checked }));
-  }
-
   async function buscarProdutoPorId(id: string) {
     await buscar(`/produtos/${id}`, setProduto, { headers: { Authorization: token } });
   }
@@ -55,7 +49,7 @@ function FormularioProduto() {
   }
 
   async function buscarCategorias() {
-    await buscar('/categorias', setCategorias, { headers: { Authorization: token } });
+    await buscar('/categorias/all', setCategorias, { headers: { Authorization: token } });
   }
 
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
@@ -87,6 +81,11 @@ function FormularioProduto() {
     retornar();
   }
 
+  function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, checked } = e.target;
+    setProduto((prevProduto) => ({ ...prevProduto, [name]: checked }));
+  }
+
   function handleProdutoError(error: any) {
     if (error.toString().includes('403')) {
       ToastAlerta('O token expirou, favor logar novamente', Toast.Error);
@@ -95,30 +94,6 @@ function FormularioProduto() {
       ToastAlerta('Erro ao cadastrar/atualizar o Produto', Toast.Error);
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     setProduto({
@@ -141,9 +116,7 @@ function FormularioProduto() {
 
   useEffect(() => {
     buscarCategorias();
-    if (id !== undefined) {
-      buscarProdutoPorId(id);
-    }
+    if (id !== undefined) { buscarProdutoPorId(id); }
   }, [id]);
 
   useEffect(() => {
@@ -217,7 +190,7 @@ function FormularioProduto() {
               title="categoria"
               name="categoria"
               id="categoria"
-              value={produto.categoria?.id || ''} 
+              value={produto.categoria?.id || ''}
               onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
               required
             >

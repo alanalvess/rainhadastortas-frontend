@@ -1,18 +1,20 @@
 import { useContext, useEffect, useState } from 'react'
+import { DNA } from 'react-loader-spinner'
 
-import { buscar } from '../../services/Service'
+import { AuthContext } from '../../contexts/AuthContext'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
+import { buscar } from '../../services/Service'
 
 import Categoria from '../../models/Categoria'
-import CardProdutoCliente from '../../components/produtos/cardProdutoCliente/CardProdutoCliente'
+import Produto from '../../models/Produto'
 import CardProdutoAdmin from '../../components/produtos/cardProdutoAdmin/CardProdutoAdmin'
-import { AuthContext } from '../../contexts/AuthContext'
-import { DNA } from 'react-loader-spinner'
+import CardProdutoCliente from '../../components/produtos/cardProdutoCliente/CardProdutoCliente'
 
 function Produtos() {
 
-  const { usuario, produtos, setProdutos } = useContext(AuthContext);
+  const { usuario } = useContext(AuthContext);
 
+  const [produtos, setProdutos] = useState<Produto[]>([])
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
 
@@ -20,7 +22,7 @@ function Produtos() {
   const produtosOrdenados = produtosFiltrados.sort((a, b) => a.nome.localeCompare(b.nome));
   const produtosDisponiveis = produtosOrdenados.filter((produto) => produto.disponivel);
   const produtosIndisponiveis = produtosOrdenados.filter((produto) => !produto.disponivel);
-  const todosOsProdutos = [...produtosDisponiveis, ...produtosIndisponiveis];
+  const todosProdutosFiltrados = [...produtosDisponiveis, ...produtosIndisponiveis];
 
   async function buscarCategorias() {
     try {
@@ -39,7 +41,11 @@ function Produtos() {
   }
 
   function handleCategoriaClick(categoriaNome: string) {
-    setCategoriaSelecionada(categoriaNome);
+    if (categoriaNome === categoriaSelecionada) {
+      setCategoriaSelecionada(null)
+    } else {
+      setCategoriaSelecionada(categoriaNome)
+    }
   }
 
   useEffect(() => {
@@ -47,40 +53,40 @@ function Produtos() {
     buscarProdutos();
   }, [categoriaSelecionada, categorias.length]);
 
-  useEffect(() => {
-    if (categorias.length > 0 && categoriaSelecionada === null) {
-      setCategoriaSelecionada(categorias[0].nome);
-      todosOsProdutos
-    }
-  }, [categorias, categoriaSelecionada]);
-
   let produtosComponent
 
   if (usuario.token !== "") {
-
     produtosComponent = (
-
       <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {todosOsProdutos.map((produto) => (
-          <CardProdutoAdmin key={produto.id} produto={produto} />
-        ))}
+        {categoriaSelecionada === null
+          ? produtos.map((produto) => (
+            <CardProdutoAdmin key={produto.id} produto={produto} />
+          ))
+          : todosProdutosFiltrados.map((produto) => (
+            <CardProdutoAdmin key={produto.id} produto={produto} />
+          ))
+        }
+
       </div>
     )
+
   } else {
     produtosComponent = (
-
       <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {todosOsProdutos.map((produto) => (
-          <CardProdutoCliente key={produto.id} produto={produto} />
-        ))}
+        {categoriaSelecionada === null
+          ? produtos.map((produto) => (
+            <CardProdutoCliente key={produto.id} produto={produto} />
+          ))
+          : todosProdutosFiltrados.map((produto) => (
+            <CardProdutoCliente key={produto.id} produto={produto} />
+          ))
+        }
       </div>
     )
   }
 
   return (
     <>
-
-
       <div className='pt-60 min-h-[95vh]'>
         <div className='container mx-auto p-4 flex justify-evenly gap-4 rounded-xl bg-rose-500'>
 
@@ -95,7 +101,7 @@ function Produtos() {
           ))}
         </div>
 
-        {todosOsProdutos.length === 0 && (
+        {produtos.length === 0 && (
           <DNA
             visible={true}
             height="200"
@@ -105,7 +111,8 @@ function Produtos() {
             wrapperClass="dna-wrapper mx-auto"
           />
         )}
-        {produtosComponent}
+
+        {produtosComponent} 
       </div>
     </>
   )

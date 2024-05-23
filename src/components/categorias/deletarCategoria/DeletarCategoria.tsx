@@ -89,7 +89,7 @@ function DeletarCategoria() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default DeletarCategoria;

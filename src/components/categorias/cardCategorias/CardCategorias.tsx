@@ -9,7 +9,7 @@ interface CardCategoriaProps {
 function CardCategorias({ categoria }: CardCategoriaProps) {
   return (
     <>
-      <div className='border flex flex-col rounded-2xl overflow-auto justify-between '>
+      <div className='border flex flex-col rounded-2xl overflow-auto justify-between'>
         <h4 className='py-3 px-6 bg-rose-700 text-white font-bold text-2xl'>Categoria</h4>
         <p className='p-8 text-3xl bg-rose-200 h-full'>{categoria.nome}</p>
 
@@ -17,6 +17,7 @@ function CardCategorias({ categoria }: CardCategoriaProps) {
           <Link to={`/editarCategoria/${categoria.id}`} className='w-full text-rose-100 bg-rose-400 hover:bg-rose-700 flex items-center justify-center py-2'>
             <button>Editar</button>
           </Link>
+          
           <Link to={`/deletarCategoria/${categoria.id}`} className='text-rose-100 bg-rose-500 hover:bg-rose-700 w-full flex items-center justify-center'>
             <button>Deletar</button>
           </Link>

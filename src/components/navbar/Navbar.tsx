@@ -70,7 +70,9 @@ function Navbar() {
                   <div className="container-total-carrinho badge-total-carrinho text-black mx-1">
                     <p>Meu Carrinho</p>
                   </div>
+
                   <ShoppingCart className="bg-rose-600 text-rose-200 p-1 rounded-lg mx-1" size={45} weight="fill" />
+
                   <span className="absolute z-50 right-1 top-2 inline-flex items-center justify-center w-6 h-6 me-2 text-sm text-rose-600 font-bold rounded-full">
                     {quantidadeProdutos}
 
@@ -81,7 +83,7 @@ function Navbar() {
           </div>
         </div>
       </>
-    );
+    )
   }
 
   return (

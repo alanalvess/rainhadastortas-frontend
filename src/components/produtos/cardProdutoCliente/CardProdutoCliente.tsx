@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { ShoppingCart } from '@phosphor-icons/react';
 
-import Produto from '../../../models/Produto'
-import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+
+import Produto from '../../../models/Produto'
 
 interface CardProdutoClienteProps {
   produto: Produto;
@@ -10,11 +11,11 @@ interface CardProdutoClienteProps {
 
 function CardProdutoCliente({ produto }: CardProdutoClienteProps) {
 
-  const { adicionarProduto } = useContext(AuthContext)
+  const { adicionarProduto } = useContext(AuthContext);
 
   const handleMais = () => {
-    adicionarProduto({ ...produto});
-};
+    adicionarProduto({ ...produto });
+  }
 
   return (
     <div className='flex flex-col rounded-xl overflow-auto justify-between bg-rose-200'>
@@ -24,7 +25,7 @@ function CardProdutoCliente({ produto }: CardProdutoClienteProps) {
 
         <div className='p-4'>
           <h4 className='text-xl font-semibold uppercase p-2 text-rose-800'>{produto.nome}</h4>
-          <img className="h-auto max-w-full rounded-lg" src={produto.imagem} alt="Imagem do Sabor" />
+          <img className="max-h-40 max-w-full rounded-lg" src={produto.imagem} alt="Imagem do Sabor" />
           <p className='text-lg font-semibold py-4'>Preço: R$ {produto.valor.toFixed(2).replace('.', ',')}</p>
           <p className='text-lg py-2'>{produto.descricao}</p>
         </div>
@@ -54,8 +55,7 @@ function CardProdutoCliente({ produto }: CardProdutoClienteProps) {
         </div>
       </div>
     </div>
-  );
-
+  )
 }
 
 export default CardProdutoCliente;

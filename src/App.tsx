@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
 import { ToastContainer } from 'react-toastify';
+
+import { AuthProvider } from './contexts/AuthContext';
 
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
@@ -16,10 +17,10 @@ import Produtos from './pages/produtos/Produtos';
 import FormularioProduto from './components/produtos/formularioProduto/FormularioProduto';
 import DeletarProduto from './components/produtos/deletarProduto/DeletarProduto';
 
-import 'react-toastify/dist/ReactToastify.css';
 import Carrinho from './pages/carrinho/Carrinho';
-
 import Sobre from './pages/sobre/Sobre';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 

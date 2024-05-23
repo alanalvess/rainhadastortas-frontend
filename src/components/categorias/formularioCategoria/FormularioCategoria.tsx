@@ -124,7 +124,7 @@ function FormularioCategoria() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
 export default FormularioCategoria;
