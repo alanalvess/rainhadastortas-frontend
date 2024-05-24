@@ -79,8 +79,8 @@ const Carrinho = () => {
   } else {
     carrinhoComponent = (
       <div className=' pt-60 pb-10 bg-rose-50'>
-        <div className='px-20 py-10 mx-40 mb-10 rounded-3xl bg-rose-300'>
-          <h2 className='bg-rose-700 rounded-xl p-10 text-white font-bold text-2xl text-center uppercase '>Carrinho Vazio</h2>
+        <div className=' lg:px-20 lg:py-10 lg:mx-40 lg:mb-10 rounded-3xl bg-rose-300 xs:bg-rose-50'>
+          <h2 className='bg-rose-700 rounded-xl p-10 text-white font-bold text-2xl text-center uppercase xs:mx-5'>Carrinho Vazio</h2>
         </div>
       </div>
     );
