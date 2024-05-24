@@ -63,7 +63,7 @@ function DeletarProduto() {
   }, [id]);
 
   return (
-    <div className='container w-1/3 mx-auto p-4 pt-60 '>
+    <div className=' lg:w-1/3 mx-auto p-4 pt-60 '>
       <h1 className='text-4xl text-center my-4'>Deletar Produto</h1>
 
       <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja excluir a Produto a seguir?</p>

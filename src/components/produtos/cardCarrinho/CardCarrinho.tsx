@@ -33,7 +33,7 @@ function CardCarrinho({ produto }: CardCarrinhoProps) {
     <div className='flex flex-col rounded-l-xl justify-between m-4 mr-0 p-4 bg-rose-100 overflow-auto'>
       <div>
         <div className=' flex '>
-          <img className="max-h-[100px] max-w-[100px] rounded-lg" src={produto.imagem} alt="Imagem do Sabor" />
+          <img className="sm:h-32 sm:w-32 object-cover rounded-lg xs:h-16 xs:w-16" src={produto.imagem} alt="Imagem do Sabor" />
           <div className='mx-4'>
             <h3 className='text-xs font-bold text-start rounded-lg py-1 px-2 bg-rose-700 text-rose-100 uppercase '>{produto.nome}</h3>
 

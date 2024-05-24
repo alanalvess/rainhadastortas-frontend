@@ -43,8 +43,8 @@ const Carrinho = () => {
   if (produtos.length > 0) {
     carrinhoComponent = (
       <div className=' pt-60 pb-10 bg-rose-50'>
-        <div className='px-20 py-10 mx-40 mb-10 rounded-3xl bg-rose-300'>
-          <h2 className='bg-rose-700 rounded-xl p-10 text-white font-bold text-2xl text-center uppercase '>Meu Carrinho</h2>
+        <div className='sm:px-20 sm:py-10 sm:mx-40 sm:mb-10 rounded-xl bg-rose-300 xs:px-4 xs:py-4 xs:mx-10'>
+          <h2 className='bg-rose-700 rounded-xl sm:p-10 text-white font-bold text-xl text-center uppercase xs:p-5'>Meu Carrinho</h2>
 
           {produtos.map((produto) => (
             <div className='flex' key={produto.id}>
@@ -52,7 +52,7 @@ const Carrinho = () => {
                 <CardCarrinho produto={produto} />
               </div>
               <button className='p-4 bg-rose-400 m-4 ml-0 rounded-r-xl text-rose-950' onClick={() => removerProduto(produto.id)}>
-                <Trash size={30} />
+                <Trash size={30} className='' />
               </button>
             </div>
           ))}

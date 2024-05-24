@@ -2,10 +2,10 @@ function Sobre() {
   return (
     <>
       <div className=" bg-rose-50 pt-60 rounded-xl text-justify	">
-        <div className=" mx-40 rounded-xl text-justify ">
+        <div className=" lg:mx-40 rounded-xl text-justify xs:mx-10">
 
-          <h2 className="bg-rose-500 text-center font-bold text-white text-3xl p-5 rounded-xl mb-10">Conheça um pouco da nossa história</h2>
-          <div className=" flex flex-col gap-3 px-10 pb-20">
+          <h2 className="bg-rose-500 text-center font-bold text-white sm:text-3xl sm:p-5 rounded-xl sm:mb-10 xs:p-2 xs:text-xl">Conheça um pouco da nossa história</h2>
+          <div className=" flex flex-col gap-3 sm:px-10 sm:pb-20 xs:px-4">
 
             <p>
               Maria Auxiliadora Pereira, também carinhosamente chamadas de Dôra, sempre teve talento para a cozinha. Cozinheira amadora, sempre gostou de experimentar receitas novas que descobria por aí. De vez em quando, alguém lhe pedia informalmente pra que ela fizesse algum prato, doce ou salgado. Foi daí que sua fama de boa cozinheira começou a crescer, de boca em boca - literalmente! - e os pedidos passaram a ser mais volumosos.

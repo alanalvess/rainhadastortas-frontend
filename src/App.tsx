@@ -3,8 +3,8 @@ import { ToastContainer } from 'react-toastify';
 
 import { AuthProvider } from './contexts/AuthContext';
 
-import Navbar from './components/navbar/Navbar';
-import Footer from './components/footer/Footer';
+import NavbarElement from './components/navbarElement/NavbarElement';
+import FooterElement from './components/footerElement/FooterElement';
 import Login from './pages/login/Login';
 import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/home/home';
@@ -31,32 +31,38 @@ function App() {
 
           <ToastContainer />
 
-          <Navbar />
+          <div className='min-w-full h-[100vh] m-0 p-0 bg-rose-50'>
 
-          <div className=' bg-rose-50 min-h-[70vh]'>
-            <Routes >
+            <NavbarElement />
 
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/categorias" element={<Categorias />} />
-              <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
-              <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
-              <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-              <Route path="/produtos" element={<Produtos />} />
-              <Route path="/produtos/all" element={<Produtos />} />
-              <Route path="/cadastroProduto" element={<FormularioProduto />} />
-              <Route path="/editarProduto/:id" element={<FormularioProduto />} />
-              <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
-              <Route path="/carrinho" element={<Carrinho />} />
-              <Route path="/sobre" element={<Sobre />} />
+            <div className=' bg-rose-50 '>
+              <Routes >
 
-            </Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/categorias" element={<Categorias />} />
+                <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
+                <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
+                <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
+                <Route path="/produtos" element={<Produtos />} />
+                <Route path="/produtos/all" element={<Produtos />} />
+                <Route path="/cadastroProduto" element={<FormularioProduto />} />
+                <Route path="/editarProduto/:id" element={<FormularioProduto />} />
+                <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
+                <Route path="/carrinho" element={<Carrinho />} />
+                <Route path="/sobre" element={<Sobre />} />
+
+              </Routes>
+            </div>
+
+            <div className='absolute w-full'>
+
+              <FooterElement />
+            </div>
+
           </div>
-
-          <Footer />
-
         </BrowserRouter>
       </AuthProvider>
     </>

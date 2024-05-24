@@ -9,7 +9,7 @@ interface CardCategoriaProps {
 function CardCategorias({ categoria }: CardCategoriaProps) {
   return (
     <>
-      <div className='border flex flex-col rounded-2xl overflow-auto justify-between'>
+      <div className='border flex flex-col rounded-2xl overflow-auto justify-between xs:min-w-60'>
         <h4 className='py-3 px-6 bg-rose-700 text-white font-bold text-2xl'>Categoria</h4>
         <p className='p-8 text-3xl bg-rose-200 h-full'>{categoria.nome}</p>
 

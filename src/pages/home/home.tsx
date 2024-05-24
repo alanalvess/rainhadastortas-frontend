@@ -17,14 +17,14 @@ function Home() {
 
   if (usuario.token !== "") {
     homeCoponent = (
-      <div className="bg-rose-50 flex justify-center pt-40 min-h-[88vh]">
+      <div className="bg-rose-50 flex justify-center pt-40 max-w-full min-h-[88vh]">
         <div className="flex flex-col items-center justify-center p-4">
-          <div className="flex justify-around w-[60vw] h-[20vh] gap-10">
-            <button className='border bg-rose-200 text-rose-900 text-5xl p-4 rounded-3xl hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
+          <div className="flex justify-around  h-[20vh] gap-10 xs:flex-col ">
+            <button className='border bg-rose-200 text-rose-900 xs:text-xl lg:text-5xl p-4 xs:rounded-xl lg:rounded-3xl lg:hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
               <Link to={'/cadastroCategoria'}>Cadastrar Categoria</Link>
             </button>
             
-            <button className='border bg-rose-200 text-rose-900 text-5xl p-4 rounded-3xl hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
+            <button className='border bg-rose-200 text-rose-900 xs:text-xl lg:text-5xl p-4 xs:rounded-xl lg:rounded-3xl lg:hover:text-5xl hover:text-rose-200 hover:bg-rose-600 w-full'>
               <Link to={'/cadastroProduto'}>Cadastrar Produto</Link>
             </button>
           </div>

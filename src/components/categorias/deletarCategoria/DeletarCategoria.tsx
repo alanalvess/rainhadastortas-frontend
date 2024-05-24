@@ -62,7 +62,7 @@ function DeletarCategoria() {
   }, [id]);
 
   return (
-    <div className='container w-1/3 mx-auto pt-60 p-4'>
+    <div className='lg:w-1/3 mx-auto pt-60 p-4'>
       <h1 className='text-4xl text-center my-4'>Deletar categoria</h1>
 
       <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar o categoria a seguir?</p>

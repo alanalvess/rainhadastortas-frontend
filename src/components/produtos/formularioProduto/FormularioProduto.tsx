@@ -9,7 +9,10 @@ import { buscar, atualizar, cadastrar } from '../../../services/Service'
 import Categoria from '../../../models/Categoria'
 import Produto from '../../../models/Produto'
 
+"use client";
+
 import './FormularioProduto.css'
+import { ToggleSwitch } from 'flowbite-react'
 
 function FormularioProduto() {
 
@@ -81,9 +84,12 @@ function FormularioProduto() {
     retornar();
   }
 
-  function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>) {
-    const { name, checked } = e.target;
-    setProduto((prevProduto) => ({ ...prevProduto, [name]: checked }));
+  // function handleCheckboxChange(e: ChangeEvent<HTMLInputElement>) {
+  //   const { name, checked } = e.target;
+  //   setProduto((prevProduto) => ({ ...prevProduto, [name]: checked }));
+  // }
+  function handleCheckboxChange(checked: boolean) {
+    setProduto((prevProduto) => ({ ...prevProduto, disponivel: checked }));
   }
 
   function handleProdutoError(error: any) {
@@ -130,7 +136,7 @@ function FormularioProduto() {
           {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
         </h1>
 
-        <form onSubmit={gerarNovoProduto} className="flex flex-col w-1/2 gap-4">
+        <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label htmlFor="nome">Nome do Produto</label>
             <input
@@ -201,7 +207,7 @@ function FormularioProduto() {
             </select>
           </div>
 
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <label htmlFor="disponivel">Produto está disponível?</label>
             <input
               className="toggle w-10 h-5"
@@ -211,7 +217,12 @@ function FormularioProduto() {
               checked={produto.disponivel}
               onChange={handleCheckboxChange}
             />
+          </div> */}
+
+          <div className="flex max-w-md flex-col gap-4">
+            <ToggleSwitch checked={produto.disponivel} label="Produto Disponível?" onChange={handleCheckboxChange} />
           </div>
+
 
           <button
             disabled={id !== undefined && produto.nome === ''}

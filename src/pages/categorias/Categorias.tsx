@@ -27,20 +27,20 @@ function Categorias() {
 
   return (
     <>
-      {categorias.length === 0 && (
-        <DNA
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
-      )}
-
       <div className="flex justify-center pt-60 min-h-[95vh]">
-        <div className="container flex flex-col m-4 ">
+        {categorias.length === 0 && (
+          <DNA
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper mx-auto"
+          />
+        )}
+        <div className="flex flex-col m-4 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 m-4">
+
             {categorias.map((categoria) => (
               <>
                 <CardCategorias key={categoria.id} categoria={categoria} />

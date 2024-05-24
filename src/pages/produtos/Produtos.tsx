@@ -8,22 +8,31 @@ import { buscar } from '../../services/Service'
 import Categoria from '../../models/Categoria'
 import Produto from '../../models/Produto'
 import CardProduto from '../../components/produtos/cardProduto/CardProduto'
+import { ListGroup, ListGroupItem } from 'flowbite-react'
 
 function Produtos() {
 
   const { usuario } = useContext(AuthContext);
 
-  const [produtos, setProdutos] = useState<Produto[]>([])
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
 
+  const categoriasOrdenadas = categorias.sort((a, b) => a.nome.localeCompare(b.nome));
+
   const produtosFiltrados = produtos.filter((produto) => produto.categoria?.nome === categoriaSelecionada);
-  const produtosOrdenados = produtosFiltrados.sort((a, b) => a.nome.localeCompare(b.nome));
+  const produtosFiltradosOrdenados = produtosFiltrados.sort((a, b) => a.nome.localeCompare(b.nome));
+  const produtosFiltradosDisponiveis = produtosFiltradosOrdenados.filter((produto) => produto.disponivel);
+  const produtosFiltradosIndisponiveis = produtosFiltradosOrdenados.filter((produto) => !produto.disponivel);
+  const todosProdutosFiltrados = [...produtosFiltradosDisponiveis, ...produtosFiltradosIndisponiveis];
+
+  const produtosOrdenados = produtos.sort((a, b) => a.nome.localeCompare(b.nome));
   const produtosDisponiveis = produtosOrdenados.filter((produto) => produto.disponivel);
   const produtosIndisponiveis = produtosOrdenados.filter((produto) => !produto.disponivel);
-  const todosProdutosFiltrados = [...produtosDisponiveis, ...produtosIndisponiveis];
+  const todosProdutos = [...produtosDisponiveis, ...produtosIndisponiveis];
 
-  const produtosParaExibir = categoriaSelecionada === null ? produtos : todosProdutosFiltrados;
+  const produtosParaExibir = categoriaSelecionada === null ? todosProdutos : todosProdutosFiltrados;
 
   async function buscarCategorias() {
     try {
@@ -58,13 +67,13 @@ function Produtos() {
 
   if (usuario.token !== "") {
     produtosComponent = (
-      <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+      <div className='container mx-auto py-4 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
         {produtosParaExibir.length > 0 ? (
           produtosParaExibir.map((produto) => (
             <CardProduto key={produto.id} produto={produto} />
           ))
         ) : (
-          <p className="text-center col-span-full">Não há produtos desta categoria</p>
+          <p className="text-center col-span-full">Não há produtos</p>
         )}
 
       </div>
@@ -86,32 +95,39 @@ function Produtos() {
 
   return (
     <>
-      <div className='pt-60 min-h-[95vh]'>
-        <div className='container mx-auto p-4 flex justify-evenly gap-4 rounded-xl bg-rose-500'>
+      <div className='pt-60 flex  min-h-[95vh]  '>
 
-          {categorias.map((categoria) => (
-            <button
-              key={categoria.id}
-              onClick={() => handleCategoriaClick(categoria.nome)}
-              className={`bg-rose-100 px-2 py-1 rounded-lg hover:bg-rose-800 hover:text-rose-100 ${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
-            >
-              {categoria.nome}
-            </button>
-          ))}
+        <div className='sm:min-w-[25vw] xs:min-w-[10vw] '>
+          <div className="flex justify-center">
+            <ListGroup className="sm:w-48 m-4 xs:w-32">
+              {categoriasOrdenadas.map((categoria) => (
+                <ListGroupItem
+                  key={categoria.id}
+                  onClick={() => handleCategoriaClick(categoria.nome)}
+                  className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
+                  active={categoria.nome === categoriaSelecionada}
+                >
+                  {categoria.nome}
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </div>
         </div>
 
-        {produtos.length === 0 && (
-          <DNA
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper mx-auto"
-          />
-        )}
+        <div className='mx-6'>
+          {produtos.length === 0 && (
+            <DNA
+              visible={true}
+              height="200"
+              width="200"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper mx-auto"
+            />
+          )}
 
-        {produtosComponent}
+          {produtosComponent}
+        </div>
       </div>
     </>
   )

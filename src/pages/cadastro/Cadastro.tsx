@@ -67,7 +67,7 @@ function Cadastro() {
 
   return (
     <>
-      <div className="flex justify-center mx-[20vw] bg-rose-100  font-bold h-screen place-items-center">
+      <div className="flex justify-center lg:mx-[20vw] bg-rose-100  font-bold h-screen place-items-center">
         <form className='flex justify-center items-center flex-col w-2/3 gap-3' onSubmit={cadastrarNovoUsuario}>
           <h2 className='text-rose-900 text-5xl'>Cadastrar</h2>
 
