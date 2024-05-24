@@ -40,10 +40,12 @@ function FooterElement() {
       <Footer >
         <div className="w-full text-gray-200 text-center">
           <div className="w-full bg-rose-600 px-4 py-6 sm:flex sm:items-center sm:justify-around">
-            <FooterCopyright href="/login" by="Rainha das Tortas™ | Tortaria" year={2024} className='text-gray-200' />
+            <Link to={'/login'}>
+              <FooterCopyright by="Rainha das Tortas™ | Tortaria" year={2024} className='text-gray-200' />
+            </Link>
             <div className="mt-4 flex items-center space-x-6 sm:mt-0 sm:justify-center">
               <p className='flex items-center gap-3 text-center'>
-                Acesse nosso Instagram: 
+                Acesse nosso Instagram:
                 <FooterIcon href="https://www.instagram.com/rainhadastortas2023/" icon={BsInstagram} className='text-gray-200' />
               </p>
             </div>
