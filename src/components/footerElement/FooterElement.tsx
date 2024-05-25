@@ -36,11 +36,13 @@ function FooterElement() {
             <Link to={'/login'}>
               <FooterCopyright by="Rainha das Tortas™ | Tortaria" year={2024} className='text-gray-200 text-xl' />
             </Link>
-            <div className="mt-4 flex items-center space-x-6 sm:mt-0 sm:justify-center">
-              <p className='flex items-center gap-3 text-center text-xl'>
-                Acesse nosso Instagram:
-                <FooterIcon href="https://www.instagram.com/rainhadastortas2023/" icon={BsInstagram} className='text-gray-200' />
-              </p>
+            <p className=' lg:flex my-2 items-center gap-3 text-center text-xl'>
+              Acesse nosso Instagram:
+              <div className='flex justify-center my-2'>
+                <FooterIcon href="https://www.instagram.com/rainhadastortas2023/" icon={BsInstagram} className='flex items-center text-gray-200' />
+              </div>
+            </p>
+            <div className="flex items-center text-center space-x-6 sm:mt-0 sm:justify-center">
             </div>
           </div>
         </div>

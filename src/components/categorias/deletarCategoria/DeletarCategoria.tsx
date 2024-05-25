@@ -45,7 +45,7 @@ function DeletarCategoria() {
   }
 
   function retornar() {
-    navigate("/categorias");
+    navigate("/produtos");
   }
 
   useEffect(() => {
@@ -62,14 +62,14 @@ function DeletarCategoria() {
   }, [id]);
 
   return (
-    <div className='lg:w-1/3 mx-auto pt-60 p-4'>
+    <div className='sm:w-1/3 mx-auto pt-60 p-4'>
       <h1 className='text-4xl text-center my-4'>Deletar categoria</h1>
 
       <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar o categoria a seguir?</p>
 
       <div className='border flex flex-col rounded-2xl overflow-auto justify-between'>
-        <h4 className='py-2 px-6 bg-rose-600 text-white font-bold text-2xl'>Categoria</h4>
-        <p className='p-8 text-3xl bg-rose-200 h-full'>{categoria.nome}</p>
+        <h4 className='py-4 px-6 bg-rose-600 text-white font-bold text-2xl'></h4>
+        <p className='p-2 text-3xl bg-rose-200 h-full'>{categoria.nome}</p>
 
         <div className="flex">
           <button className='text-rose-100 bg-rose-400 hover:bg-rose-700 w-full py-2' onClick={retornar}>Não</button>

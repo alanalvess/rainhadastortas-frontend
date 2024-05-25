@@ -34,7 +34,7 @@ function CardProduto({ produto }: CardProdutoProps) {
         </div>
 
         <Link to={`/editarProduto/${produto.id}`} className='text-white col-span-2'>
-          <Button color="pink" className=' w-full ' >
+          <Button  className=' w-full ' >
             Editar
           </Button>
         </Link>
@@ -53,12 +53,12 @@ function CardProduto({ produto }: CardProdutoProps) {
       <div className='text-white w-full '>
         {produto.disponivel ?
           (
-            <Button onClick={handleAdicionar} color="pink" className='w-full' >
+            <Button onClick={handleAdicionar} className='w-full' >
               <HiShoppingCart className="mr-2 h-5 w-5" />
               <span>Adicionar</span>
             </Button>
           ) : (
-            <Button className='w-full flex itens-center' color="pink" disabled>
+            <Button className='w-full flex itens-center' disabled>
               <HiXCircle className="mr-2 h-5 w-5" />
               <span>Indisponível</span>
             </Button>

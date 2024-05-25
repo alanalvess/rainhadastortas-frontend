@@ -70,7 +70,7 @@ function FormularioCategoria() {
   }
 
   function retornar() {
-    navigate("/categorias");
+    navigate("/produtos");
   }
 
   useEffect(() => {

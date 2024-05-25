@@ -11,7 +11,6 @@ import Produto from '../../../models/Produto'
 
 "use client";
 
-import './FormularioProduto.css'
 import { ToggleSwitch } from 'flowbite-react'
 
 function FormularioProduto() {

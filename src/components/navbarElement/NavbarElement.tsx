@@ -32,29 +32,13 @@ function NavbarElement() {
             </Link>
           </NavbarBrand>
           <div>
+            <div className="bg-rose-300 rounded-lg px-2 text-rose-900 my-4 max-w-32 hover:text-white hover:bg-rose-700" >
+              <Link to='' onClick={logout} className='flex items-center justify-center'>
+                <span className='text-xl '>Sair</span>
 
-            <div className="flex md:order-2">
-
-              <NavbarToggle className='text-gray-200' />
+                <SignOut className=" text-rose-900 p-1 rounded-lg " size={40} weight="fill" />
+              </Link>
             </div>
-            <NavbarCollapse className='my-4'>
-              <div className='flex gap-6 items-center'>
-                <NavbarLink className='bg-rose-600 items-center' active>
-                  <Link to='/produtos' className='text-2xl text-gray-200 items-center hover:underline'>Produtos</Link>
-                </NavbarLink>
-                <NavbarLink className='bg-rose-600' active>
-                  <Link to='/categorias' className='text-2xl text-gray-200 hover:underline'>Categorias</Link>
-                </NavbarLink>
-
-              </div>
-              <div className="bg-rose-300 rounded-lg px-2 text-rose-900 my-4 max-w-32 hover:text-white hover:bg-rose-700" >
-                <Link to='' onClick={logout} className='flex items-center justify-center'>
-                  <span className='text-xl '>Sair</span>
-
-                  <SignOut className=" text-rose-900 p-1 rounded-lg " size={40} weight="fill" />
-                </Link>
-              </div>
-            </NavbarCollapse>
           </div>
         </Navbar>
       </>
@@ -72,43 +56,40 @@ function NavbarElement() {
             </Link>
           </NavbarBrand>
 
-          <div>
+          <div className='lg:flex items-center gap-5'>
 
-            <div className="flex md:order-2">
+            <div>
 
-              <NavbarToggle className='text-gray-200' />
-            </div>
-            <NavbarCollapse className='my-4 '>
-
-              <div className='flex gap-6 items-center'>
-                <NavbarLink className='bg-rose-600' active>
-                  <Link to='/sobre' className='text-2xl text-gray-200 hover:underline'>A Tortaria</Link>
-                </NavbarLink>
-                <NavbarLink className='bg-rose-600' active>
-                  <Link to='/produtos' className='text-2xl text-gray-200 hover:underline'>Produtos</Link>
-                </NavbarLink>
-
+              <div className="flex justify-end md:order-2">
+                <NavbarToggle className='text-gray-200 m-1' />
               </div>
 
-            </NavbarCollapse>
-          </div>
-          <div >
+              <NavbarCollapse className='my-4 '>
+                <div className='flex gap-6 items-center'>
+                  <NavbarLink className='bg-rose-600' active>
+                    <Link to='/sobre' className='text-2xl text-gray-200 hover:underline'>A Tortaria</Link>
+                  </NavbarLink>
+                  <NavbarLink className='bg-rose-600' active>
+                    <Link to='/produtos' className='text-2xl text-gray-200 hover:underline'>Produtos</Link>
+                  </NavbarLink>
 
-            <Link to={'/carrinho'}>
-              <div className='flex items-center relative my-4 max-w-40'>
-
-                <div className="container-total-carrinho badge-total-carrinho  text-gray-200 mx-1">
-                  <p>Meu Carrinho</p>
                 </div>
 
-                <ShoppingCart className="bg-rose-600 text-rose-200 p-1 rounded-lg mx-1 " size={45} weight="fill" />
+              </NavbarCollapse>
+            </div>
+            <div>
+              <Link to={'/carrinho'} >
+                <div className='flex items-center justify-end relative my-4 lg:max-w-40'>
 
-                <span className="absolute z-50 right-1 top-2 inline-flex items-center justify-center w-6 h-6 me-2 text-sm text-rose-600 font-bold rounded-full">
-                  {quantidadeProdutos}
+                  <ShoppingCart className="bg-rose-600 text-rose-200 p-1 rounded-lg mx-1 " size={45} weight="fill" />
 
-                </span>
-              </div>
-            </Link>
+                  <span className="absolute z-50 right-1 top-2 inline-flex items-center justify-center w-6 h-6 me-2 text-sm text-rose-600 font-bold rounded-full">
+                    {quantidadeProdutos}
+
+                  </span>
+                </div>
+              </Link>
+            </div>
           </div>
         </Navbar>
       </>

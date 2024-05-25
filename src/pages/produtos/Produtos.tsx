@@ -8,7 +8,7 @@ import { buscar } from '../../services/Service'
 import Categoria from '../../models/Categoria'
 import Produto from '../../models/Produto'
 import CardProduto from '../../components/produtos/cardProduto/CardProduto'
-import { Button, ListGroup, ListGroupItem } from 'flowbite-react'
+import { Button, Dropdown, ListGroup, ListGroupItem } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 
 function Produtos() {
@@ -64,21 +64,72 @@ function Produtos() {
     buscarProdutos();
   }, [categoriaSelecionada, categorias.length]);
 
-  let produtosComponent
+  let produtosComponent;
+  let listComponent;
 
   if (usuario.token !== "") {
     produtosComponent = (
       <div>
-
-        <div className="flex flex-wrap gap-2 m-5">
-          <Button>
+        <div className="flex flex-wrap gap-3 m-5">
+          <Button >
             <Link to={'/cadastroCategoria'}>Cadastrar Categoria</Link>
+          </Button>
+          <Button>
+            <Link to={'/cadastroProduto'}>Cadastrar Produto</Link>
           </Button>
         </div>
       </div>
     )
-
   }
+
+  if (usuario.token !== "") {
+    listComponent = (
+      <ListGroup className="sm:w-48 m-4 xs:w-32">
+        {categoriasOrdenadas.map((categoria) => (
+          <ListGroupItem
+            key={categoria.id}
+            onClick={() => handleCategoriaClick(categoria.nome)}
+            className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
+            active={categoria.nome === categoriaSelecionada}
+          >
+            <Dropdown label="" inline>
+              <Dropdown.Item>
+                <Link to={`/editarCategoria/${categoria.id}`} className='w-full'>Editar</Link>
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item>
+                <Link to={`/deletarCategoria/${categoria.id}`} className='w-full '>Deletar</Link>
+              </Dropdown.Item>
+            </Dropdown>
+
+            {categoria.nome}
+          </ListGroupItem>
+        ))}
+
+        {produtosComponent}
+      </ListGroup>
+    )
+  } else {
+    listComponent = (
+      <ListGroup className="sm:w-48 m-4 xs:w-32">
+        {categoriasOrdenadas.map((categoria) => (
+          <ListGroupItem
+            key={categoria.id}
+            onClick={() => handleCategoriaClick(categoria.nome)}
+            className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
+            active={categoria.nome === categoriaSelecionada}
+          >
+            {categoria.nome}
+          </ListGroupItem>
+        ))}
+
+        {produtosComponent}
+      </ListGroup>
+    )
+  }
+
+
+
 
   return (
     <>
@@ -89,20 +140,9 @@ function Produtos() {
 
           <div className='sm:min-w-[25vw] xs:min-w-[10vw] '>
             <div className="flex justify-center">
-              <ListGroup className="sm:w-48 m-4 xs:w-32">
-                {categoriasOrdenadas.map((categoria) => (
-                  <ListGroupItem
-                    key={categoria.id}
-                    onClick={() => handleCategoriaClick(categoria.nome)}
-                    className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
-                    active={categoria.nome === categoriaSelecionada}
-                  >
-                    {categoria.nome}
-                  </ListGroupItem>
-                ))}
 
-                {produtosComponent}
-              </ListGroup>
+              {listComponent}
+
             </div>
           </div>
 

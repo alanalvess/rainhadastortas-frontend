@@ -9,7 +9,6 @@ import Login from './pages/login/Login';
 import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/home/home';
 
-import Categorias from './pages/categorias/Categorias';
 import FormularioCategoria from './components/categorias/formularioCategoria/FormularioCategoria';
 import DeletarCategoria from './components/categorias/deletarCategoria/DeletarCategoria';
 
@@ -42,7 +41,6 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/categorias" element={<Categorias />} />
                 <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
                 <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
                 <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
