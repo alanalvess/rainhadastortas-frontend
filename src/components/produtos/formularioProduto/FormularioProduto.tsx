@@ -106,6 +106,14 @@ function FormularioProduto() {
       [e.target.name]: e.target.value,
       categoria: categoria
     });
+  }  
+  
+  function atualizarEstadoTexto(e: ChangeEvent<HTMLTextAreaElement>) {
+    setProduto({
+      ...produto,
+      [e.target.name]: e.target.value,
+      categoria: categoria
+    });
   }
 
   function retornar() {
@@ -177,13 +185,12 @@ function FormularioProduto() {
 
           <div className="flex flex-col gap-2">
             <label htmlFor="descricao">descricao do Produto</label>
-            <input
+            <textarea
               className="border-2 border-slate-700 rounded p-2"
-              type="text"
               placeholder="descricao"
               name="descricao"
               value={produto.descricao}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstadoTexto(e)}
               required
             />
           </div>
