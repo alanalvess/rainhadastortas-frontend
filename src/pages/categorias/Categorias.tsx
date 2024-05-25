@@ -6,6 +6,8 @@ import { buscar } from '../../services/Service'
 
 import Categoria from '../../models/Categoria'
 import CardCategorias from '../../components/categorias/cardCategorias/CardCategorias'
+import { Button } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 function Categorias() {
 
@@ -38,14 +40,21 @@ function Categorias() {
             wrapperClass="dna-wrapper mx-auto"
           />
         )}
-        <div className="flex flex-col m-4 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 m-4">
+        <div>
+          <div className="flex flex-wrap gap-2 m-5">
+            <Button>
+              <Link to={'/cadastroCategoria'}>Cadastrar Categoria</Link>
+            </Button>
+          </div>
+          <div className="flex flex-col m-4 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 m-4">
 
-            {categorias.map((categoria) => (
-              <>
-                <CardCategorias key={categoria.id} categoria={categoria} />
-              </>
-            ))}
+              {categorias.map((categoria) => (
+                <>
+                  <CardCategorias key={categoria.id} categoria={categoria} />
+                </>
+              ))}
+            </div>
           </div>
         </div>
       </div>

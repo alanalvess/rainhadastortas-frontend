@@ -27,7 +27,7 @@ function NavbarElement() {
       <>
         <Navbar fluid className='bg-rose-800 fixed top-0 z-40 w-full justify-between '>
           <NavbarBrand>
-            <Link to='/home' className='text-2xl font-bold uppercase'>
+            <Link to='/produtos' className='text-2xl font-bold uppercase'>
               <img src={Logo} className='logo rounded-3xl' alt="logo" width={100} />
             </Link>
           </NavbarBrand>

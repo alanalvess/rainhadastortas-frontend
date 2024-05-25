@@ -8,7 +8,8 @@ import { buscar } from '../../services/Service'
 import Categoria from '../../models/Categoria'
 import Produto from '../../models/Produto'
 import CardProduto from '../../components/produtos/cardProduto/CardProduto'
-import { ListGroup, ListGroupItem } from 'flowbite-react'
+import { Button, ListGroup, ListGroupItem } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 function Produtos() {
 
@@ -67,66 +68,66 @@ function Produtos() {
 
   if (usuario.token !== "") {
     produtosComponent = (
-      <div className='container mx-auto py-4 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {produtosParaExibir.length > 0 ? (
-          produtosParaExibir.map((produto) => (
-            <CardProduto key={produto.id} produto={produto} />
-          ))
-        ) : (
-          <p className="text-center col-span-full">Não há produtos</p>
-        )}
+      <div>
 
+        <div className="flex flex-wrap gap-2 m-5">
+          <Button>
+            <Link to={'/cadastroCategoria'}>Cadastrar Categoria</Link>
+          </Button>
+        </div>
       </div>
     )
 
-  } else {
-    produtosComponent = (
-      <div className='container mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        {produtosParaExibir.length > 0 ? (
-          produtosParaExibir.map((produto) => (
-            <CardProduto key={produto.id} produto={produto} />
-          ))
-        ) : (
-          <p className="text-center col-span-full">Não há produtos</p>
-        )}
-      </div>
-    )
   }
 
   return (
     <>
-      <div className='pt-60 flex  min-h-[95vh]  '>
+      <div className='pt-60 flex-col min-h-[95vh]  '>
 
-        <div className='sm:min-w-[25vw] xs:min-w-[10vw] '>
-          <div className="flex justify-center">
-            <ListGroup className="sm:w-48 m-4 xs:w-32">
-              {categoriasOrdenadas.map((categoria) => (
-                <ListGroupItem
-                  key={categoria.id}
-                  onClick={() => handleCategoriaClick(categoria.nome)}
-                  className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
-                  active={categoria.nome === categoriaSelecionada}
-                >
-                  {categoria.nome}
-                </ListGroupItem>
-              ))}
-            </ListGroup>
+        <div className='flex'>
+
+
+          <div className='sm:min-w-[25vw] xs:min-w-[10vw] '>
+            <div className="flex justify-center">
+              <ListGroup className="sm:w-48 m-4 xs:w-32">
+                {categoriasOrdenadas.map((categoria) => (
+                  <ListGroupItem
+                    key={categoria.id}
+                    onClick={() => handleCategoriaClick(categoria.nome)}
+                    className={`${categoria.nome === categoriaSelecionada ? 'font-bold' : ''}`}
+                    active={categoria.nome === categoriaSelecionada}
+                  >
+                    {categoria.nome}
+                  </ListGroupItem>
+                ))}
+
+                {produtosComponent}
+              </ListGroup>
+            </div>
           </div>
-        </div>
 
-        <div className='mx-6'>
-          {produtos.length === 0 && (
-            <DNA
-              visible={true}
-              height="200"
-              width="200"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper mx-auto"
-            />
-          )}
+          <div className='mx-6'>
+            {produtos.length === 0 && (
+              <DNA
+                visible={true}
+                height="200"
+                width="200"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass="dna-wrapper mx-auto"
+              />
+            )}
 
-          {produtosComponent}
+            <div className='mx-auto py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+              {produtosParaExibir.length > 0 ? (
+                produtosParaExibir.map((produto) => (
+                  <CardProduto key={produto.id} produto={produto} />
+                ))
+              ) : (
+                <p className="text-center col-span-full">Não há produtos</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>
