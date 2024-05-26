@@ -133,7 +133,7 @@ function Produtos() {
 
   return (
     <>
-      <div className='pt-60 flex-col min-h-[95vh]  '>
+      <div className='pt-40 flex-col min-h-[95vh]  '>
 
         <div className='flex'>
 

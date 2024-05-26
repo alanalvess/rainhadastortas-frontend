@@ -5,7 +5,7 @@ import { ShoppingCart, SignOut } from '@phosphor-icons/react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
 
-import Logo from '../../assets/images/logo.jpeg'
+import Logo from '../../assets/images/dupomar.png'
 import { Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from 'flowbite-react'
 
 function NavbarElement() {
@@ -66,10 +66,10 @@ function NavbarElement() {
 
               <NavbarCollapse className='my-4 '>
                 <div className='flex gap-6 items-center'>
-                  <NavbarLink className='bg-rose-600' active>
+                  <NavbarLink className='bg-rose-600 rounded-lg' active>
                     <Link to='/sobre' className='text-2xl text-gray-200 hover:underline'>A Tortaria</Link>
                   </NavbarLink>
-                  <NavbarLink className='bg-rose-600' active>
+                  <NavbarLink className='bg-rose-600 rounded-lg' active>
                     <Link to='/produtos' className='text-2xl text-gray-200 hover:underline'>Produtos</Link>
                   </NavbarLink>
 

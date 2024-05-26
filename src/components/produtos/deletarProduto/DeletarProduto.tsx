@@ -63,42 +63,44 @@ function DeletarProduto() {
   }, [id]);
 
   return (
-    <div className=' lg:w-1/3 mx-auto p-4 pt-60 '>
-      <h1 className='text-4xl text-center my-4'>Deletar Produto</h1>
+    <>
+      <div className='pt-40'>
 
-      <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja excluir a Produto a seguir?</p>
+        <div className=' lg:w-1/3 mx-auto lg:bg-white lg:border border-gray-200 rounded-lg lg:shadow-lg '>
+          <h4 className='text-2xl text-center my-4'>Deletar Produto?</h4>
 
-      <div className=' bg-rose-200 flex flex-col rounded-2xl overflow-auto justify-between'>
-        <div className="flex w-full bg-rose-700 text-white py-3 px-4 items-center gap-4"></div>
+          <div className=' bg-rose-100 flex flex-col rounded-xl overflow-auto justify-between m-10'>
 
-        <div className=" flex p-4">
-          <img className="max-h-[200px] max-w-[200px] rounded-xl" src={produto.imagem} alt="Imagem do Sabor" />
+            <div className=" flex ">
+              <img className=" lg:max-w-[200px] rounded-l-xl xs:max-w-[150px]" src={produto.imagem} alt="Imagem do Sabor" />
 
-          <div>
-            <h4 className='text-xl font-semibold uppercase p-2 text-rose-800'>{produto.nome}</h4>
-            <p className='text-lg p-2'>{produto.descricao}</p>
+              <div>
+                <h4 className='lg:text-xl xs:text-lg font-semibold uppercase p-2 text-rose-800'>{produto.nome}</h4>
+                <p className='lg:text-lg xs:text-sm p-2'>{produto.descricao}</p>
+                <div className="flex">
+                  <button className='text-rose-100 bg-rose-400 hover:bg-rose-700 w-full p-2' onClick={retornar}>Não</button>
+
+                  <button className='w-full text-rose-100 bg-rose-500 hover:bg-rose-700 flex items-center justify-center ' onClick={deletarProduto}>
+                    {isLoading ?
+                      <RotatingLines
+                        strokeColor="white"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        width="24"
+                        visible={true}
+                      /> :
+                      <span>Sim</span>
+                    }
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-
-        </div>
-
-        <div className="flex">
-          <button className='text-rose-100 bg-rose-400 hover:bg-rose-700 w-full py-2' onClick={retornar}>Não</button>
-
-          <button className='w-full text-rose-100 bg-rose-500 hover:bg-rose-700 flex items-center justify-center' onClick={deletarProduto}>
-            {isLoading ?
-              <RotatingLines
-                strokeColor="white"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="24"
-                visible={true}
-              /> :
-              <span>Sim</span>
-            }
-          </button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

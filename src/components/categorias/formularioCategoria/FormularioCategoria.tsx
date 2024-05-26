@@ -87,43 +87,47 @@ function FormularioCategoria() {
   }, [token]);
 
   return (
-    <div className="container flex flex-col mx-auto items-center justify-center pt-60 pb-20">
-      <h1 className="text-4xl text-center my-8 text-rose-900">
-        {id === undefined ? 'Cadastrar Categoria' : 'Editar Categoria'}
-      </h1>
+    <div className='pt-40'>
 
-      <form className="flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
-        <div className="flex flex-col gap-2">
+
+        <div className="flex justify-center lg:mx-[20vw] font-bold bg-white border border-gray-200 rounded-lg shadow-lg">
+          <form className='flex justify-center items-center flex-col w-2/3 gap-3 py-10' onSubmit={gerarNovaCategoria}>
+        <h1 className="text-4xl text-center my-8 text-rose-900">
+        {id === undefined ? 'Cadastrar Categoria' : 'Editar Categoria'}
+        </h1>
+        
+        <div className="flex flex-col gap-2 w-full">
           <label htmlFor="nome">Nome da categoria</label>
           <input
-            className="border-2 border-rose-700 rounded p-2"
+            className="border-2 border-slate-700 rounded p-2"
             type="text"
             placeholder="nome"
             name='nome'
             value={categoria.nome}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             required
-          />
+            />
         </div>
 
         <button
           disabled={id !== undefined && categoria.nome === ''}
           className="rounded text-rose-100 bg-rose-500 hover:bg-rose-700 w-1/2 py-2 mx-auto flex justify-center"
           type="submit"
-        >
+          >
           {isLoading ?
             <RotatingLines
-              strokeColor="white"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="24"
-              visible={true}
+            strokeColor="white"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="24"
+            visible={true}
             /> :
             id !== undefined ? <span>Editar</span> : <span>Cadastrar</span>
           }
         </button>
       </form>
     </div>
+      </div>
   )
 }
 

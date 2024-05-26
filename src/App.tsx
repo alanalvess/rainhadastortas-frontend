@@ -30,11 +30,11 @@ function App() {
 
           <ToastContainer />
 
-          <div className='min-w-full h-[100vh] m-0 p-0 bg-rose-50'>
+          <div className='min-w-full m-0 p-0 bg-rose-50 h-screen'>
 
             <NavbarElement />
 
-            <div className=' bg-rose-50 '>
+            <div className=' bg-rose-50 min-h-[90vh]'>
               <Routes >
 
                 <Route path="/" element={<Home />} />

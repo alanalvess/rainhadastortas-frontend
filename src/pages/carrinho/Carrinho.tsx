@@ -9,7 +9,7 @@ import CardCarrinho from '../../components/produtos/cardCarrinho/CardCarrinho';
 const Carrinho = () => {
   let carrinhoComponent;
   let linkWhatsapp = '';
-  
+
   const CELULAR_EMPRESA = '5511984982465';
 
   const { produtos, removerProduto } = useContext(AuthContext);
@@ -42,7 +42,7 @@ const Carrinho = () => {
 
   if (produtos.length > 0) {
     carrinhoComponent = (
-      <div className=' pt-60 pb-10 bg-rose-50'>
+      <div className=' pt-40 pb-10 bg-rose-50'>
         <div className='sm:px-20 sm:py-10 sm:mx-40 sm:mb-10 rounded-xl bg-rose-300 xs:px-4 xs:py-4 xs:mx-10'>
           <h2 className='bg-rose-700 rounded-xl sm:p-10 text-white font-bold text-xl text-center uppercase xs:p-5'>Meu Carrinho</h2>
 
@@ -51,21 +51,24 @@ const Carrinho = () => {
               <div className='flex-grow'>
                 <CardCarrinho produto={produto} />
               </div>
-              <button className='p-4 bg-rose-400 m-4 ml-0 rounded-r-xl text-rose-950' onClick={() => removerProduto(produto.id)}>
+              <button className='p-2 lg:p-4 bg-rose-400 m-4 ml-0 rounded-r-xl text-rose-950' onClick={() => removerProduto(produto.id)}>
                 <Trash size={30} className='' />
               </button>
             </div>
           ))}
 
-          <hr className="border-rose-800 my-10 w-full" />
 
           <div className='p-0 rounded-xl m-5 text-right'>
+            <hr className="border-rose-800 my-5 w-full" />
+
             <p className='font-bold'>
               Valor total do carrinho:
-              <span className=' text-white mx-2 '>
-                R$ {calcularTotalCarrinho().toFixed(2).replace('.', ',')}
-              </span>
             </p>
+            <p className=' text-white font-bold'>
+              R$ {calcularTotalCarrinho().toFixed(2).replace('.', ',')}
+            </p>
+
+            <hr className="border-rose-800 my-5 w-full" />
 
             <Link to={urlWhatsapp()} target="_blank" rel="noopener noreferrer">
               <button className='p-4 bg-rose-700 text-white font-bold my-5 rounded-2xl hover:bg-rose-900'>Finalizar Pedido</button>
@@ -78,7 +81,7 @@ const Carrinho = () => {
 
   } else {
     carrinhoComponent = (
-      <div className=' pt-60 pb-10 bg-rose-50'>
+      <div className=' pt-40 pb-10 bg-rose-50'>
         <div className=' lg:px-20 lg:py-10 lg:mx-40 lg:mb-10 rounded-3xl bg-rose-300 xs:bg-rose-50'>
           <h2 className='bg-rose-700 rounded-xl p-10 text-white font-bold text-2xl text-center uppercase xs:mx-5'>Carrinho Vazio</h2>
         </div>

@@ -106,8 +106,8 @@ function FormularioProduto() {
       [e.target.name]: e.target.value,
       categoria: categoria
     });
-  }  
-  
+  }
+
   function atualizarEstadoTexto(e: ChangeEvent<HTMLTextAreaElement>) {
     setProduto({
       ...produto,
@@ -138,115 +138,107 @@ function FormularioProduto() {
 
   return (
     <>
-      <div className="container flex flex-col mx-auto items-center justify-center pt-60 pb-20">
-        <h1 className="text-4xl text-center my-8 text-rose-900">
-          {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
-        </h1>
+      <div className=' py-40'>
 
-        <form onSubmit={gerarNovoProduto} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="nome">Nome do Produto</label>
-            <input
-              className="border-2 border-slate-700 rounded p-2"
-              type="text"
-              placeholder="nome"
-              name="nome"
-              value={produto.nome}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              required
-            />
-          </div>
+        <div className="flex justify-center lg:mx-[20vw] font-bold lg:bg-white lg:border border-gray-200 rounded-lg lg:shadow-lg">
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="imagem">Link da imagem</label>
-            <input
-              className="border-2 border-slate-700 rounded p-2"
-              type="text"
-              placeholder="imagem"
-              name="imagem"
-              value={produto.imagem}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              required
-            />
-          </div>
+          <form className="flex justify-center items-center flex-col w-2/3 gap-3 py-10" onSubmit={gerarNovoProduto}>
+            <h2 className="text-4xl text-center my-8 text-rose-900">
+              {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
+            </h2>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="valor">Valor do Produto</label>
-            <input
-              className="border-2 border-slate-700 rounded p-2"
-              type="number"
-              placeholder="valor"
-              name="valor"
-              value={produto.valor}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              required
-            />
-          </div>
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="nome">Nome do Produto</label>
+              <input
+                className="border-2 border-slate-700 rounded p-2 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
+                type="text"
+                placeholder="nome"
+                name="nome"
+                value={produto.nome}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                required
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="descricao">descricao do Produto</label>
-            <textarea
-              className="border-2 border-slate-700 rounded p-2"
-              placeholder="descricao"
-              name="descricao"
-              value={produto.descricao}
-              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstadoTexto(e)}
-              required
-            />
-          </div>
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="imagem">Link da imagem</label>
+              <input
+                className="border-2 border-slate-700 rounded p-2 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
+                type="text"
+                placeholder="imagem"
+                name="imagem"
+                value={produto.imagem}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                required
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="categoria">Categoria do Produto</label>
-            <select
-              className="border-2 border-slate-700 rounded p-2"
-              title="categoria"
-              name="categoria"
-              id="categoria"
-              value={produto.categoria?.id || ''}
-              onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
-              required
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="valor">Valor do Produto</label>
+              <input
+                className="border-2 border-slate-700 rounded p-2 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
+                type="number"
+                placeholder="valor"
+                name="valor"
+                value={produto.valor}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="descricao">descricao do Produto</label>
+              <textarea
+                className="border-2 border-slate-700 rounded p-2 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
+                placeholder="descricao"
+                name="descricao"
+                value={produto.descricao}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstadoTexto(e)}
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <label htmlFor="categoria">Categoria do Produto</label>
+              <select
+                className="border-2 border-slate-700 rounded p-2 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
+                title="categoria"
+                name="categoria"
+                id="categoria"
+                value={produto.categoria?.id || ''}
+                onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+                required
+              >
+                <option value="" disabled>Selecione uma categoria</option>
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex max-w-md flex-col gap-4">
+              <ToggleSwitch checked={produto.disponivel} label="Produto Disponível?" onChange={handleCheckboxChange} />
+            </div>
+
+
+            <button
+              disabled={id !== undefined && produto.nome === ''}
+              className='rounded disabled:bg-slate-200 bg-rose-500 hover:bg-rose-700 text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
+              type='submit'
             >
-              <option value="" disabled>Selecione uma categoria</option>
-              {categorias.map((categoria) => (
-                <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* <div className="flex flex-col gap-2">
-            <label htmlFor="disponivel">Produto está disponível?</label>
-            <input
-              className="toggle w-10 h-5"
-              type="checkbox"
-              placeholder='Produto Disponível'
-              name="disponivel"
-              checked={produto.disponivel}
-              onChange={handleCheckboxChange}
-            />
-          </div> */}
-
-          <div className="flex max-w-md flex-col gap-4">
-            <ToggleSwitch checked={produto.disponivel} label="Produto Disponível?" onChange={handleCheckboxChange} />
-          </div>
-
-
-          <button
-            disabled={id !== undefined && produto.nome === ''}
-            className='rounded disabled:bg-slate-200 bg-rose-500 hover:bg-rose-700 text-white font-bold w-1/2 mx-auto py-2 flex justify-center'
-            type='submit'
-          >
-            {isLoading ?
-              <RotatingLines
-                strokeColor="white"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="24"
-                visible={true}
-              /> : id !== undefined ? <span>Editar</span> : <span>Cadastrar</span>
-            }
-          </button>
-        </form >
-      </div >
+              {isLoading ?
+                <RotatingLines
+                  strokeColor="white"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                /> : id !== undefined ? <span>Editar</span> : <span>Cadastrar</span>
+              }
+            </button>
+          </form >
+        </div >
+      </div>
     </>
   );
 }
