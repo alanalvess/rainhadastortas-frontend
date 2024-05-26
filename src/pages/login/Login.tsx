@@ -78,12 +78,12 @@ function Login() {
 
           <hr className="border-rose-800 w-full" />
 
-          {/* <p>
+          <p>
             Ainda não tem uma conta?{' '}
             <Link to="/cadastro" className="text-rose-800 hover:underline">
               Cadastre-se
             </Link>
-          </p> */}
+          </p>
         </form>
       </div>
     </>
