@@ -42,8 +42,6 @@ function FooterElement() {
                 <FooterIcon href="https://www.instagram.com/rainhadastortas2023/" target='blank' icon={BsInstagram} className='flex items-center text-gray-200' />
               </div>
             </p>
-            <div className="flex items-center text-center space-x-6 sm:mt-0 sm:justify-center">
-            </div>
           </div>
         </div>
       </Footer>
