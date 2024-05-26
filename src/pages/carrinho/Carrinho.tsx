@@ -10,7 +10,7 @@ const Carrinho = () => {
   let carrinhoComponent;
   let linkWhatsapp = '';
 
-  const CELULAR_EMPRESA = '5511984982465';
+  const CELULAR_EMPRESA = '5511982560389';
 
   const { produtos, removerProduto } = useContext(AuthContext);
 
