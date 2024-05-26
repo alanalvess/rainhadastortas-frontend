@@ -5,7 +5,7 @@ import { ShoppingCart, SignOut } from '@phosphor-icons/react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Toast, ToastAlerta } from '../../utils/ToastAlerta'
 
-import Logo from '../../assets/images/dupomar.png'
+import Logo from '../../assets/images/logo.jpeg'
 import { Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from 'flowbite-react'
 
 function NavbarElement() {
